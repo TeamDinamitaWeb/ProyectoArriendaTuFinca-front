@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Pipol } from './models/Pipol';
-import { PipolService } from './services/pipol.service';
-
+import { Usuario } from './models/Usuario';
+import { UsuarioService } from './services/usuario.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -11,46 +10,24 @@ import { PipolService } from './services/pipol.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'lospipol2';
 
-  datosModeloServicio: Pipol[] = [];
-  datosModeloServicioExterno: Pipol[] = [];
+export class AppComponent implements OnInit {
+  title = 'Lista de Usuarios';
 
-  datos = [
-    { nombre: "Pablo", apellido: "Márquez" },
-    { nombre: "María", apellido: "Pacheco" },
-    { nombre: "Francisco", apellido: "Márquez" },
-    { nombre: "Miguel", apellido: "Márquez" },
-  ]
-  datosPipol = [
-    new Pipol("Pablo", "Márquez"),
-    new Pipol("María", "Pacheco"),
-    new Pipol("Francisco", "Márquez"),
-    new Pipol("Miguel", "Márquez"),
-  ]
+  usuarios: Usuario[] = [];
 
   constructor(
-    private pipolService: PipolService
-  ) {
-  }
-  ngOnInit() {
-    this.cargarPipolService();
-    //this.cargarPipolServiceExterno();
-  }
-  cargarPipolService(){
-    this.pipolService.getPipols().subscribe( (data: Pipol[]) => {
-        this.datosModeloServicio = data;
-      }
-    );
-  }
+    private usuarioService: UsuarioService
+  ) {}
 
-  cargarPipolServiceExterno(){
-    this.pipolService.getPipolsExternos().then((data: Pipol[]) => {
-        this.datosModeloServicioExterno = data;
-      }
-    ).catch((error) => {
-      console.error('Error fetching data:', error);
-    });
+  ngOnInit(): void {
+    this.usuarioService.getUsuarios()
+      .then(usuarios => {
+        this.usuarios = usuarios;
+        console.log('Usuarios obtenidos:', this.usuarios);
+      })
+      .catch(error => {
+        console.error('Error al obtener usuarios:', error);
+      });
   }
 }

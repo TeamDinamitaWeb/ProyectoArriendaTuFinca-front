@@ -1,34 +1,22 @@
-{{ title }}
-<br/>
-<br/>
-<b>Datos</b><br/>
-<b>----------------</b>
-<br/>
-<ul>
-  <li *ngFor="let usuario of datos">
-    {{ usuario.nombre }} - {{ usuario.apellido }}
-  </li>
-</ul>
-<b>Objetos</b><br/>
-<b>----------------</b>
-<ul>
-  <li *ngFor="let usuario of datosPipol">
-    {{ usuario.nombres }} - {{ usuario.apellidos }}
-  </li>
-</ul>
+<h1>{{ title }}</h1>
 
-<b>Modelos llamados con servicios</b><br/>
-<b>----------------</b>
-<ul>
-  <li *ngFor="let usuario of datosModeloServicio">
-    {{ usuario.nombres }} - {{ usuario.apellidos }}
-  </li>
-</ul>
-
-<b>Modelos llamados con servicios externos</b><br/>
-<b>----------------</b>
-<ul>
-  <li *ngFor="let usuario of datosModeloServicioExterno">
-    {{ usuario.nombres }} - {{ usuario.apellidos }}
-  </li>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Correo</th>
+      <th>Tipo de Usuario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{ usuario.id }}</td>
+      <td>{{ usuario.nombre }}</td>
+      <td>{{ usuario.apellido }}</td>
+      <td>{{ usuario.correo }}</td>
+      <td>{{ usuario.tipoUsuario }}</td>
+    </tr>
+  </tbody>
+</table>

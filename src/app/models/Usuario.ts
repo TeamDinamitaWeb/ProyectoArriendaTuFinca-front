@@ -1,4 +1,13 @@
-export class Usuario {
+export interface Usuario {
+    id: number;
+    nombre: string;
+    apellido: string;
+    correo: string;
+    contraseña: string;
+    tipoUsuario: string;
+}
+
+/*export class Usuario {
     constructor(
         public id: number,
         public nombre: string,
@@ -7,4 +16,4 @@ export class Usuario {
         public contraseña: string,
         public tipoUsuario: string
     ) {}
-}
+}*/
