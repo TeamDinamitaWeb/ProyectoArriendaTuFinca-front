@@ -9,7 +9,7 @@ import axios from 'axios';
 })
 export class UsuarioService {
 
-  private proyectoUrlUsuarios = 'http://10.195.88.166:8081/usuarios';
+  private proyectoUrlUsuarios = 'http://localhost/usuarios';
 
   constructor() { }
 
