@@ -21,5 +21,14 @@ export class UsuarioService {
         return [];
       });
   }
+
+  postUsuario(usuario: Usuario): Promise<Usuario> {
+    return axios.post<Usuario>(this.proyectoUrlUsuarios, usuario)
+      .then(response => response.data)
+      .catch((error) => {
+        console.error('Error creando usuario:', error);
+        throw error;
+      });
+  }
   
 }
