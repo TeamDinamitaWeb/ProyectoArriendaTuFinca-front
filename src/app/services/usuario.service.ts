@@ -10,6 +10,7 @@ import axios from 'axios';
 export class UsuarioService {
 
   private proyectoUrlUsuarios = 'http://localhost/usuarios';
+  private proyectoUrlAllUsuarios = 'http://localhost/usuarios/all-including-deleted';
 
   constructor() { }
 
@@ -22,6 +23,15 @@ export class UsuarioService {
       });
   }
 
+  getAllUsuarios(): Promise<Usuario[]> {
+    return axios.get<Usuario[]>(this.proyectoUrlAllUsuarios)
+      .then(response => response.data)
+      .catch((error) => {
+        console.error('Error obteniendo todos los usuarios incluyendo los eliminados:', error);
+        return [];
+      });
+  }
+
   postUsuario(usuario: Usuario): Promise<Usuario> {
     return axios.post<Usuario>(this.proyectoUrlUsuarios, usuario)
       .then(response => response.data)
@@ -30,5 +40,22 @@ export class UsuarioService {
         throw error;
       });
   }
-  
+
+  deleteUsuario(id: number): Promise<void> {  
+    return axios.delete<void>(`${this.proyectoUrlUsuarios}/${id}`)
+      .then(response => response.data)
+      .catch((error) => {
+        console.error('Error eliminando usuario:', error);
+        throw error;
+      });
+  }
+
+  putUsuario(usuario: Usuario): Promise<Usuario> {
+    return axios.put<Usuario>(`${this.proyectoUrlUsuarios}/${usuario.id}`, usuario)
+      .then(response => response.data)
+      .catch((error) => {
+        console.error('Error actualizando usuario:', error);
+        throw error;
+      });
+  }
 }

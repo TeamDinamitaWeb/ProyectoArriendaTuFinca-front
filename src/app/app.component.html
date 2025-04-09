@@ -1,32 +1,64 @@
-<h1>{{ title }}</h1>
-
 <h1 class="text-4xl text-blue-500 font-bold text-center mt-10">
-  ¡Tailwind está funcionando!
+  {{ title }}
 </h1>
 
-<button class="btn btn-primary mt-3">
-  Botón Bootstrap
-</button>
-
-<table>
+<!-- Tabla de usuarios -->
+<table class="table-auto border-collapse w-full mt-6">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Apellido</th>
-      <th>Correo</th>
-      <th>Tipo de Usuario</th>
+      <th class="border px-4 py-2">ID</th>
+      <th class="border px-4 py-2">Nombre</th>
+      <th class="border px-4 py-2">Apellido</th>
+      <th class="border px-4 py-2">Correo</th>
+      <th class="border px-4 py-2">Tipo de Usuario</th>
+      <th class="border px-4 py-2">Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let usuario of usuarios">
-      <td>{{ usuario.id }}</td>
-      <td>{{ usuario.nombre }}</td>
-      <td>{{ usuario.apellido }}</td>
-      <td>{{ usuario.correo }}</td>
-      <td>{{ usuario.tipoUsuario }}</td>
+      <td class="border px-4 py-2">{{ usuario.id }}</td>
+      <td class="border px-4 py-2">{{ usuario.nombre }}</td>
+      <td class="border px-4 py-2">{{ usuario.apellido }}</td>
+      <td class="border px-4 py-2">{{ usuario.correo }}</td>
+      <td class="border px-4 py-2">{{ usuario.tipoUsuario }}</td>
+      <td class="border px-4 py-2">
+        <button class="bg-yellow-400 text-white px-2 py-1 rounded" (click)="seleccionarUsuario(usuario)">
+          Editar
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
-<router-outlet></router-outlet>
 
+<!-- Formulario de edición -->
+<div *ngIf="usuarioEditando" class="mt-8 p-4 border rounded bg-gray-100 max-w-xl mx-auto">
+  <h2 class="text-2xl font-semibold mb-4">Editar Usuario</h2>
+  <form (ngSubmit)="actualizarUsuario()">
+    <div class="mb-2">
+      <label class="block">Nombre:</label>
+      <input [(ngModel)]="usuarioEditando.nombre" name="nombre" class="w-full p-2 border rounded" />
+    </div>
+    <div class="mb-2">
+      <label class="block">Apellido:</label>
+      <input [(ngModel)]="usuarioEditando.apellido" name="apellido" class="w-full p-2 border rounded" />
+    </div>
+    <div class="mb-2">
+      <label class="block">Correo:</label>
+      <input [(ngModel)]="usuarioEditando.correo" name="correo" class="w-full p-2 border rounded" />
+    </div>
+    <div class="mb-2">
+      <label class="block">Tipo de Usuario:</label>
+      <input [(ngModel)]="usuarioEditando.tipoUsuario" name="tipoUsuario" class="w-full p-2 border rounded" />
+    </div>
+    <div class="mb-2">
+      <label class="block">Contraseña:</label>
+      <input [(ngModel)]="usuarioEditando.contrasena" name="contraseña" type="password" class="w-full p-2 border rounded" />
+    </div>
+
+    <div class="flex gap-4 mt-4">
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
+      <button type="button" class="bg-gray-400 text-white px-4 py-2 rounded" (click)="cancelarEdicion()">Cancelar</button>
+    </div>
+  </form>
+</div>
+<router-outlet></router-outlet>
