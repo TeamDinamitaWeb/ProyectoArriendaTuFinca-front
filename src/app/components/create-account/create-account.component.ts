@@ -3,10 +3,12 @@ import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterOutlet, RouterModule],
   standalone: true,
   templateUrl: './create-account.component.html',
   styleUrl: './create-account.component.css'

@@ -1,11 +1,12 @@
 import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import AOS from 'aos';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, RouterModule],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
 })
