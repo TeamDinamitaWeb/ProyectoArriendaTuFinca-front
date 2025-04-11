@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
 <!-- Hero -->
 <!-- Sección Hero con navbar encima -->
 <section class="relative h-screen bg-cover bg-center" style="background-image: url('assets/images/mainHero.jpg');">
@@ -5,7 +8,7 @@
   <div class="absolute inset-0 bg-black bg-opacity-50"></div>
 
   <!-- Navbar -->
-  <header class="relative z-10 flex items-center justify-between px-8 py-6">
+  <header class="relative z-10 flex items-center justify-between px-8 py-6 animate__animated animate__fadeInDown">
     <!-- Logo + título -->
     <div class="flex items-center space-x-3">
       <!-- Aquí puedes poner una imagen si quieres el logo -->
@@ -39,7 +42,7 @@
   </header>
 
   <!-- Contenido central del Hero -->
-  <div class="relative z-10 text-center text-white px-4 mt-48 max-w-3xl mx-auto">
+  <div class="relative z-10 text-center text-white px-4 mt-48 max-w-3xl mx-auto animate__animated animate__fadeInDown animate__delay-0.9s">
     <h2 class="text-5xl font-bold">Find Your Dream Home</h2>
     <p class="mt-4 text-xl">Discover properties that match your lifestyle and aspirations.</p>
     <button class="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
@@ -48,14 +51,14 @@
   </div>
 </section>
 
-<section class="py-16">
+<section class="py-16" data-aos="fade-up">
   <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Featured Properties</h2>
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Featured Properties</h2>
 
     <div class="grid md:grid-cols-3 gap-12 text-center">
       
       <!-- Propiedad 1 -->
-      <div>
+      <div data-aos="fade-up" data-aos-delay="100">
         <img src="assets/images/f1.webp" alt="Modern Family Home" class="w-full aspect-video object-cover rounded-xl shadow-sm mb-4">
         <h3 class="text-xl font-semibold text-gray-800">Modern Family Home</h3>
         <p class="text-gray-600 text-sm mt-1 mb-4">
@@ -67,7 +70,7 @@
       </div>
 
       <!-- Propiedad 2 -->
-      <div>
+      <div data-aos="fade-up" data-aos-delay="200">
         <img src="assets/images/f2.jpg" alt="Luxury City Condo" class="w-full aspect-video object-cover rounded-xl shadow-sm mb-4">
         <h3 class="text-xl font-semibold text-gray-800">Luxury City Condo</h3>
         <p class="text-gray-600 text-sm mt-1 mb-4">
@@ -79,7 +82,7 @@
       </div>
 
       <!-- Propiedad 3 -->
-      <div>
+      <div data-aos="fade-up" data-aos-delay="300">
         <img src="assets/images/f3.jpg" alt="Countryside Cottage" class="w-full aspect-video object-cover rounded-xl shadow-sm mb-4">
         <h3 class="text-xl font-semibold text-gray-800">Countryside Cottage</h3>
         <p class="text-gray-600 text-sm mt-1 mb-4">
@@ -93,6 +96,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- CTA Section -->
 <section class="bg-blue-100 py-20">
