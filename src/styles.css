@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.img-hero{
+    background-image: url('assets/images/mainHero.jpg');
+}
+
 .animated-background {
   background: linear-gradient(-45deg, #1E293B, #4B5563, #0F172A, #374151); /* Dark Modern Color Palette */
   background-size: 400% 400%;
