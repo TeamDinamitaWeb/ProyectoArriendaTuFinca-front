@@ -35,24 +35,24 @@
     <h2 class="text-2xl font-semibold mb-4">Editar Usuario</h2>
     <form (ngSubmit)="actualizarUsuario()">
       <div class="mb-2">
-        <label class="block">Nombre:</label>
-        <input [(ngModel)]="usuarioEditando.nombre" name="nombre" class="w-full p-2 border rounded" />
+        <label for="nombre" class="block">Nombre:</label>
+        <input [(ngModel)]="usuarioEditando.nombre" name="nombre" id="nombre" class="w-full p-2 border rounded" />
       </div>
       <div class="mb-2">
-        <label class="block">Apellido:</label>
-        <input [(ngModel)]="usuarioEditando.apellido" name="apellido" class="w-full p-2 border rounded" />
+        <label for="apellido" class="block">Apellido:</label>
+        <input [(ngModel)]="usuarioEditando.apellido" name="apellido" id="apellido" class="w-full p-2 border rounded" />
       </div>
       <div class="mb-2">
-        <label class="block">Correo:</label>
-        <input [(ngModel)]="usuarioEditando.correo" name="correo" class="w-full p-2 border rounded" />
+        <label for="correo" class="block">Correo:</label>
+        <input [(ngModel)]="usuarioEditando.correo" name="correo" id="correo" class="w-full p-2 border rounded" />
       </div>
       <div class="mb-2">
-        <label class="block">Tipo de Usuario:</label>
-        <input [(ngModel)]="usuarioEditando.tipoUsuario" name="tipoUsuario" class="w-full p-2 border rounded" />
+        <label for="tipoUsuario" class="block">Tipo de Usuario:</label>
+        <input [(ngModel)]="usuarioEditando.tipoUsuario" name="tipoUsuario" id="tipoUsuario" class="w-full p-2 border rounded" />
       </div>
       <div class="mb-2">
-        <label class="block">Contraseña:</label>
-        <input [(ngModel)]="usuarioEditando.contrasena" name="contraseña" type="password" class="w-full p-2 border rounded" />
+        <label for="contrasena" class="block">Contraseña:</label>
+        <input [(ngModel)]="usuarioEditando.contrasena" name="contraseña" id="contrasena" type="password" class="w-full p-2 border rounded" />
       </div>
   
       <div class="flex gap-4 mt-4">
