@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../services/usuario.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import AOS from 'aos';
+
 
 @Component({
   selector: 'app-create-account',
@@ -22,8 +24,14 @@ export class CreateAccountComponent {
   error: string = '';
 
   constructor(
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      AOS.init();
+    }
+  }
 
   crearUsuario(){
     if (!this.usuario.nombre || !this.usuario.apellido || !this.usuario.correo || !this.usuario.contrasena || !this.usuario.tipoUsuario) {

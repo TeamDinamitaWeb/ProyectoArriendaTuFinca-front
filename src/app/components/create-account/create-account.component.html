@@ -1,5 +1,13 @@
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+
 <div class="animated-background min-h-screen flex items-center justify-center">
-  <div class="bg-white p-12 rounded-2xl shadow-lg w-full max-w-[600px] border border-gray-200 z-10">
+  <div
+    data-aos="zoom-in"
+    data-aos-duration="500"
+    data-aos-easing="ease-in-out"
+    class="bg-white p-12 rounded-2xl shadow-lg w-full max-w-[600px] border border-gray-200 z-10"
+  >
     <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Create Account</h2>
     <p class="text-center text-lg text-gray-600 mb-6">Create your account to start saving your favorite properties</p>
 
@@ -71,7 +79,7 @@
       <div>
         <label class="inline-flex items-center">
           <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-200" required>
-          <span class="ml-2 text-gray-700 text-sm">I agree with <a href="#" class="text-blue-500">Terms & Conditions</a></span>
+          <span class="ml-2 text-gray-700 text-sm">I agree with <a href="#" class="no-underline text-blue-500">Terms & Conditions</a></span>
         </label>
       </div>
 
@@ -82,7 +90,7 @@
     </form>
 
     <div class="mt-4 text-center text-gray-600 text-sm">
-      Already registered? <a href="/login" class="text-blue-500 hover:underline">Log in</a>
+      Already registered? <a href="/login" class="no-underline text-blue-500 hover:underline">Log in</a>
     </div>
   </div>
 </div>
