@@ -3,3 +3,20 @@
 @tailwind components;
 @tailwind utilities;
 
+.animated-background {
+  background: linear-gradient(-45deg, #1E293B, #4B5563, #0F172A, #374151); /* Dark Modern Color Palette */
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

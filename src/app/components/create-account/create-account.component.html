@@ -1,52 +1,88 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md border border-gray-200">
-      <h2 class="text-2xl font-bold text-center mb-6 text-blue-700">Crear Cuenta</h2>
-  
-      <form (ngSubmit)="crearUsuario()" class="space-y-4">
-        <div class="form-group">
-          <label for="nombre" class="block font-medium text-gray-700">Nombre</label>
+<div class="animated-background min-h-screen flex items-center justify-center">
+  <div class="bg-white p-12 rounded-2xl shadow-lg w-full max-w-[600px] border border-gray-200 z-10">
+    <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Create Account</h2>
+    <p class="text-center text-lg text-gray-600 mb-6">Create your account to start saving your favorite properties</p>
+
+    <form (ngSubmit)="crearUsuario()" class="space-y-4">
+      <div>
+        <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
+        <div class="relative">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+          </svg>
           <input type="text" id="nombre" [(ngModel)]="usuario.nombre" name="nombre"
-            class="form-control block w-full mt-1 rounded-lg border border-gray-300 p-2 focus:ring focus:ring-blue-200"
-            required>
+            class="w-full pl-10 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-300"
+            placeholder="Your first name" required />
         </div>
-  
-        <div class="form-group">
-          <label for="apellido" class="block font-medium text-gray-700">Apellido</label>
+      </div>
+
+      <div>
+        <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
+        <div class="relative">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+          </svg>
           <input type="text" id="apellido" [(ngModel)]="usuario.apellido" name="apellido"
-            class="form-control block w-full mt-1 rounded-lg border border-gray-300 p-2 focus:ring focus:ring-blue-200"
-            required>
+            class="w-full pl-10 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-300"
+            placeholder="Your last name" required />
         </div>
-  
-        <div class="form-group">
-          <label for="correo" class="block font-medium text-gray-700">Correo</label>
+      </div>
+
+      <div>
+        <label for="correo" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+        <div class="relative">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.913A2.25 2.25 0 012.25 6.75v10.5" />
+          </svg>
           <input type="email" id="correo" [(ngModel)]="usuario.correo" name="correo"
-            class="form-control block w-full mt-1 rounded-lg border border-gray-300 p-2 focus:ring focus:ring-blue-200"
-            required>
+            class="w-full pl-10 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-300"
+            placeholder="Your email address" required />
         </div>
-  
-        <div class="form-group">
-          <label for="contraseña" class="block font-medium text-gray-700">Contraseña</label>
+      </div>
+
+      <div>
+        <label for="contraseña" class="block text-gray-700 text-sm font-bold mb-2">Create a password</label>
+        <div class="relative">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 absolute left-[12px] top-1/2 transform -translate-y-1/2 text-gray-400">
+            <path fill-rule="evenodd" d="M10 1a4 4 0 00-4 4v10a4 4 0 004 4h6a4 4 0 004-4V5a4 4 0 00-4-4H10zm-3 3a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H8a1 1 0 01-1-1V4zm6 9a1 1 0 10-2 0v3a1 1 0 102 0v-3z" clip-rule="evenodd" />
+          </svg>
           <input type="password" id="contraseña" [(ngModel)]="usuario.contrasena" name="contraseña"
-            class="form-control block w-full mt-1 rounded-lg border border-gray-300 p-2 focus:ring focus:ring-blue-200"
-            required>
+            class="w-full pl-10 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-300"
+            placeholder="Your secure password" required />
         </div>
-  
-        <div class="form-group">
-          <label for="tipoUsuario" class="block font-medium text-gray-700">Tipo de Usuario</label>
-          <select id="tipoUsuario" [(ngModel)]="usuario.tipoUsuario" name="tipoUsuario"
-            class="form-select block w-full mt-1 rounded-lg border border-gray-300 p-2 focus:ring focus:ring-blue-200"
-            required>
-            <option value="" disabled selected>Seleccione una opción</option>
-            <option value="ARRENDATARIO">ARRENDATARIO</option>
-            <option value="ARRENDADOR">ARRENDADOR</option>
-          </select>
-        </div>
-  
-        <button type="submit"
-          class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md">
-          Crear Cuenta
+      </div>
+
+      <div class="flex justify-between gap-4">
+        <button type="button"
+          (click)="usuario.tipoUsuario = 'ARRENDATARIO'"
+          [ngClass]="{'bg-blue-500 text-white': usuario.tipoUsuario === 'ARRENDATARIO', 'bg-gray-100 text-gray-700 hover:bg-gray-200': usuario.tipoUsuario !== 'ARRENDATARIO'}"
+          class="flex-1 py-2 px-4 rounded-md border border-gray-300 font-semibold text-sm">
+          Tenant
         </button>
-      </form>
+
+        <button type="button"
+          (click)="usuario.tipoUsuario = 'ARRENDADOR'"
+          [ngClass]="{'bg-blue-500 text-white': usuario.tipoUsuario === 'ARRENDADOR', 'bg-gray-100 text-gray-700 hover:bg-gray-200': usuario.tipoUsuario !== 'ARRENDADOR'}"
+          class="flex-1 py-2 px-4 rounded-md border border-gray-300 font-semibold text-sm">
+          Landlord
+        </button>
+      </div>
+
+      <div>
+        <label class="inline-flex items-center">
+          <input type="checkbox" class="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-200" required>
+          <span class="ml-2 text-gray-700 text-sm">I agree with <a href="#" class="text-blue-500">Terms & Conditions</a></span>
+        </label>
+      </div>
+
+      <button type="submit"
+        class="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+        Sign Up
+      </button>
+    </form>
+
+    <div class="mt-4 text-center text-gray-600 text-sm">
+      Already registered? <a href="/login" class="text-blue-500 hover:underline">Log in</a>
     </div>
   </div>
-  
+</div>
