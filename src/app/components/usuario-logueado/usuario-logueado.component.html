@@ -1,0 +1,170 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<section class="relative h-screen bg-cover bg-center img-hero">
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+
+  <header class="relative z-10 flex items-center justify-between px-8 py-6 animate__animated animate__fadeInDown">
+    <div class="flex items-center space-x-3">
+      <img src="assets/images/Logo.png" alt="Logo"
+        class="w-10 h-10 object-contain -mt-1" />
+      <h1 class="text-2xl font-bold text-white">Property Finder</h1>
+    </div>
+
+    <nav class="flex space-x-6 text-white font-medium">
+    <a href="#" class="no-underline relative pb-1 border-b-2 border-blue-500 text-blue-400">
+        Home
+    </a>
+    <a href="#" class="no-underline relative pb-1 border-b-2 border-transparent hover:border-blue-500 transition">
+        Properties
+    </a>
+    <a href="#" class="no-underline relative pb-1 border-b-2 border-transparent hover:border-blue-500 transition">
+        Contact
+    </a>
+    </nav>
+
+    <div class="flex space-x-4 ">
+      <div class="relative" *ngIf="usuarioLogueado">
+        <button (click)="toggleMenuPerfil()" class="flex items-center space-x-2 text-white cursor-pointer focus:outline-none">
+            <i class="fa fa-user-circle fa-lg"></i>
+            <span>{{ usuarioLogueado.nombre }}</span>
+        </button>
+
+        <div *ngIf="mostrarMenuPerfil" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl origin-top-right animate__animated animate__slideInDown animate__faster">
+          <div class="py-1">
+            <a href="/update-usuario" class="no-underline block px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Edit Profile</a>
+            <a href="/delete-account" class="no-underline block px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Logout</a>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="!usuarioLogueado">
+        <button routerLink="/login" class="border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white transition">
+          Sign In
+        </button>
+        <button routerLink="/create-account" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+          Sign Up
+        </button>
+      </ng-container>
+    </div>
+  </header>
+
+  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-8">
+    <h1 class="text-2xl font-semibold animate__animated animate__fadeInUp" data-aos="fade-down" data-aos-duration="800">
+        Welcome {{ usuarioLogueado.nombre }}
+    </h1>
+    <h2 class="text-4xl font-bold animate__animated animate__fadeInUp" data-aos="fade-down" data-aos-duration="800">
+      Find Your Dream Property
+    </h2>
+    <p class="mt-4 text-lg animate__animated animate__fadeInUp animate__delay-1s" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+      Explore a wide range of properties and find the perfect place to call home.
+    </p>
+    <div class="mt-8 animate__animated animate__fadeInUp animate__delay-2s" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="600">
+      <input type="text" placeholder="Enter location or property ID" class="px-6 py-3 rounded-full text-gray-700 w-full sm:w-auto">
+      <button class="bg-blue-500 text-white px-8 py-3 rounded-full hover:bg-blue-600 transition mt-4 sm:mt-0 sm:ml-4">
+        Search
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="py-16" data-aos="fade-up">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up">Featured Properties</h2>
+  
+      <div class="grid md:grid-cols-3 gap-12 text-center">
+        
+        <!-- Propiedad 1 -->
+        <div data-aos="fade-up" data-aos-delay="100">
+          <img src="assets/images/f1.webp" alt="Modern Family Home" class="w-full aspect-video object-cover rounded-xl shadow-sm mb-4">
+          <h3 class="text-xl font-semibold text-gray-800">Modern Family Home</h3>
+          <p class="text-gray-600 text-sm mt-1 mb-4">
+            4-bedroom house in a quiet neighborhood. Includes a pool and spacious backyard.
+          </p>
+          <button class="text-blue-600 border border-blue-600 px-4 py-2 rounded-full hover:bg-blue-50 transition">
+            View Description
+          </button>
+        </div>
+  
+        <!-- Propiedad 2 -->
+        <div data-aos="fade-up" data-aos-delay="200">
+          <img src="assets/images/f2.jpg" alt="Luxury City Condo" class="w-full aspect-video object-cover rounded-xl shadow-sm mb-4">
+          <h3 class="text-xl font-semibold text-gray-800">Luxury City Condo</h3>
+          <p class="text-gray-600 text-sm mt-1 mb-4">
+            2-bedroom condo in the heart of downtown. Features high-end finishes and amenities.
+          </p>
+          <button class="text-blue-600 border border-blue-600 px-4 py-2 rounded-full hover:bg-blue-50 transition">
+            View Description
+          </button>
+        </div>
+  
+        <!-- Propiedad 3 -->
+        <div data-aos="fade-up" data-aos-delay="300">
+          <img src="assets/images/f3.jpg" alt="Countryside Cottage" class="w-full aspect-video object-cover rounded-xl shadow-sm mb-4">
+          <h3 class="text-xl font-semibold text-gray-800">Countryside Cottage</h3>
+          <p class="text-gray-600 text-sm mt-1 mb-4">
+            Cozy 3-bedroom cottage with a large garden. Perfect for nature lovers.
+          </p>
+          <button class="text-blue-600 border border-blue-600 px-4 py-2 rounded-full hover:bg-blue-50 transition">
+            View Description
+          </button>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+
+<footer class="bg-[#1c1e22] text-white pt-10 pb-6 mt-12" data-aos="fade-up">
+  <!-- Newsletter -->
+  <div class="max-w-6xl mx-auto px-4 text-center md:text-right mb-10">
+    <h4 class="text-lg font-semibold mb-3" data-aos="200">Subscribe to our newsletter</h4>
+    <form class="flex justify-center">
+      <div class="flex items-center bg-[#1c1e22] border border-gray-600 rounded-full overflow-hidden">
+        <span class="pl-4 text-gray-400"><i class="fas fa-envelope"></i></span>
+        <input 
+          type="email" 
+          placeholder="Input your email" 
+          class="px-4 py-2 bg-[#1c1e22] text-white placeholder-gray-400 focus:outline-none"
+        />
+        <button class="bg-blue-500 text-white px-5 py-2 rounded-r-full hover:bg-blue-600">Subscribe</button>
+      </div>
+    </form>
+    
+  </div>
+
+  <!-- Main links -->
+  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-6 pt-6">
+    <!-- Brand -->
+    <div class="flex items-center gap-3 justify-center md:justify-start">
+      <img src="assets/images/Logo.png" alt="Logo" class="h-14 w-auto" />
+      <span class="text-4xl font-semibold">Property Finder</span>
+    </div>
+
+    <!-- Nav links -->
+    <ul class="flex flex-wrap items-center md:h-10 justify-center gap-6 text-base mt-3">
+      <li><a href="#" class="no-underline hover:text-blue-400 transition-colors duration-200">Pricing</a></li>
+      <li><a href="#" class="no-underline hover:text-blue-400 transition-colors duration-200">About us</a></li>
+      <li><a href="#" class="no-underline hover:text-blue-400 transition-colors duration-200">Features</a></li>
+      <li><a href="#" class="no-underline hover:text-blue-400 transition-colors duration-200">Help Center</a></li>
+      <li><a href="#" class="no-underline hover:text-blue-400 transition-colors duration-200">Contact us</a></li>
+      <li><a href="#" class="no-underline hover:text-blue-400 transition-colors duration-200">FAQs</a></li>
+      <li><a href="#" class="no-underline hover:text-blue-400 transition-colors duration-200">Careers</a></li>
+    </ul>
+  </div>
+
+
+  <!-- Bottom bar -->
+  <div class="max-w-6xl mx-auto px-4 mt-6 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-gray-600 pt-6 text-sm text-gray-400">
+    <!-- Copyright -->
+    <div class="text-center">&copy; 2025 Property Finder, Inc. &bull; <a href="#" class="no-underline hover:text-blue-400 transition-colors duration-200">Privacy</a> &bull; <a href="#" class="no-underline hover:text-blue-400 transition-colors duration-200">Terms</a> &bull; <a href="#" class="no-underline hover:text-blue-400 transition-colors duration-200">Sitemap</a></div>
+
+    <!-- Socials -->
+    <div class="flex space-x-4 text-white text-xl">
+      <a href="#" class="hover:text-blue-400" title="Follow us on Twitter"><i class="fab fa-x-twitter"></i></a>
+      <a href="#" class="hover:text-blue-600" title="Like us on Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="hover:text-blue-500" title="Connect with us on LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="#" class="hover:text-red-500" title="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+</footer>

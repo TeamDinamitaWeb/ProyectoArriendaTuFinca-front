@@ -1,10 +1,9 @@
-import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router';
 import AOS from 'aos';
 
 
@@ -51,8 +50,5 @@ export class CreateAccountComponent {
         this.mensaje = '';
         console.error('Error creando usuario:', error);
       });
-
-
-
   }
 }

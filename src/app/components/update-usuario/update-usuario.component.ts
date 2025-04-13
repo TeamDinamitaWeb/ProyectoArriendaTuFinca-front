@@ -13,7 +13,7 @@ import { UsuarioService } from '../../services/usuario.service';
   styleUrl: './update-usuario.component.css'
 })
 export class UpdateUsuarioComponent {
-title = 'Lista de Usuarios';
+  title = 'Lista de Usuarios';
   usuarios: Usuario[] = [];
   usuarioEditando: Usuario | null = null;
 
