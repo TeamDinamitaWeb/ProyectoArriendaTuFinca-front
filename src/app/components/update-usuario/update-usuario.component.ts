@@ -18,8 +18,8 @@ export class UpdateUsuarioComponent implements OnInit, AfterViewInit {
   usuario: Usuario = {
     id: 0,
     nombre: 'juan',
-    apellido: '',
-    correo: '',
+    apellido: 'camargo',
+    correo: 'xdxd@xd.com',
     contrasena: '',
     tipoUsuario: 'ARRENDATARIO'
   };
