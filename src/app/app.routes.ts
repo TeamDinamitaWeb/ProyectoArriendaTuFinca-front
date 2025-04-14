@@ -6,6 +6,7 @@ import { DeleteAccountComponent } from './components/delete-account/delete-accou
 import { UpdateUsuarioComponent } from './components/update-usuario/update-usuario.component';
 import { LandingComponent } from './landing/landing.component'; 
 import { UsuarioLogueadoComponent } from './components/usuario-logueado/usuario-logueado.component';
+import { PropertiesComponent } from './components/properties/properties.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -14,6 +15,7 @@ export const routes: Routes = [
   { path: 'delete-account', component: DeleteAccountComponent },
   { path: 'update-usuario', component: UpdateUsuarioComponent },
   { path: 'usuario-logueado', component: UsuarioLogueadoComponent },
+  { path: 'properties', component: PropertiesComponent },
   { path: '**', redirectTo: '' },
 ];
 
