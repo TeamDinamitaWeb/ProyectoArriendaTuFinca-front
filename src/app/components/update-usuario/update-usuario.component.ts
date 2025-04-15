@@ -29,10 +29,10 @@ export class UpdateUsuarioComponent implements OnInit, AfterViewInit {
   constructor(private usuarioService: UsuarioService, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngAfterViewInit(): void {
-      if (isPlatformBrowser(this.platformId)) {
-        AOS.init();
-      }
-    }
+     if (isPlatformBrowser(this.platformId)) {
+       AOS.init();
+     }
+  }
 
   ngOnInit(): void {
     this.cargarUsuarioLogueado();
