@@ -26,6 +26,6 @@ export class LoginComponent {
      if (isPlatformBrowser(this.platformId)) {
        AOS.init();
      }
-  }
+    }
   login(){}
 }

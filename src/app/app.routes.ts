@@ -7,6 +7,7 @@ import { UpdateUsuarioComponent } from './components/update-usuario/update-usuar
 import { LandingComponent } from './landing/landing.component'; 
 import { UsuarioLogueadoComponent } from './components/usuario-logueado/usuario-logueado.component';
 import { PropertiesComponent } from './components/properties/properties.component';
+import { VerUsuariosComponent } from './components/admin/ver-usuarios/ver-usuarios.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'update-usuario', component: UpdateUsuarioComponent },
   { path: 'usuario-logueado', component: UsuarioLogueadoComponent },
   { path: 'properties', component: PropertiesComponent },
+  { path: 'ver-usuarios', component: VerUsuariosComponent },
   { path: '**', redirectTo: '' },
 ];
 
