@@ -8,6 +8,7 @@ import { LandingComponent } from './landing/landing.component';
 import { UsuarioLogueadoComponent } from './components/usuario-logueado/usuario-logueado.component';
 import { PropertiesComponent } from './components/properties/properties.component';
 import { VerUsuariosComponent } from './components/admin/ver-usuarios/ver-usuarios.component';
+import { VerPropiedadComponent } from './components/ver-propiedad/ver-propiedad.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'usuario-logueado', component: UsuarioLogueadoComponent },
   { path: 'properties', component: PropertiesComponent },
   { path: 'ver-usuarios', component: VerUsuariosComponent },
+  { path: 'propiedad/:id', component: VerPropiedadComponent },
   { path: '**', redirectTo: '' },
 ];
 
