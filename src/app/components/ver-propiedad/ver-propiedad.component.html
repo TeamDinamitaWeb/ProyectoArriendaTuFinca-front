@@ -87,11 +87,11 @@
         <div class="grid grid-cols-2 gap-4 mb-6">
           <div class="flex items-center">
             <i class="fas fa-bed text-blue-500 mr-2"></i>
-            <span>{{ propiedad.habitaciones }} Habitaciones</span>
+            <span>{{ propiedad.habitaciones }} Rooms</span>
           </div>
           <div class="flex items-center">
             <i class="fas fa-bath text-blue-500 mr-2"></i>
-            <span>{{ propiedad.banos }} Baños</span>
+            <span>{{ propiedad.banos }} Bathrooms</span>
           </div>
           <div class="flex items-center">
             <i class="fas fa-ruler-combined text-blue-500 mr-2"></i>
@@ -99,17 +99,17 @@
           </div>
           <div class="flex items-center">
             <i class="fas fa-calendar-alt text-blue-500 mr-2"></i>
-            <span>Año {{ propiedad.ano }}</span>
+            <span>Year {{ propiedad.ano }}</span>
           </div>
         </div>
 
         <div class="mb-6">
-          <h2 class="text-lg font-semibold text-gray-800 mb-2">Descripción</h2>
+          <h2 class="text-lg font-semibold text-gray-800 mb-2">Description</h2>
           <p class="text-gray-600">{{ propiedad.descripcion }}</p>
         </div>
 
         <div class="mb-6">
-          <h2 class="text-lg font-semibold text-gray-800 mb-2">Amenidades</h2>
+          <h2 class="text-lg font-semibold text-gray-800 mb-2">Amenities</h2>
           <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
             <li *ngFor="let amenidad of propiedad.amenidades" class="flex items-center text-gray-600">
               <i class="fas fa-check-circle text-green-500 mr-2"></i>
@@ -120,7 +120,7 @@
 
         <div class="flex space-x-4">
           <button class="bg-blue-500 text-white w-full py-3 rounded-lg hover:bg-blue-600 transition flex items-center justify-center">
-            <i class="fas fa-phone-alt mr-2"></i> Contactar
+            <i class="fas fa-phone-alt mr-2"></i> Contact
           </button>
           <button class="border border-blue-500 text-blue-500 px-4 py-3 rounded-lg hover:bg-blue-50 transition" aria-label="Agregar a favoritos">
             <i class="far fa-heart"></i>
@@ -156,7 +156,7 @@
                 <i class="fas fa-bath mr-1"></i>
                 {{ propiedad.banos }}
               </span>
-              <button [routerLink]="['/propiedad', propiedad.id]" class="text-blue-500 hover:underline">Ver detalles</button>
+              <button [routerLink]="['/propiedad', propiedad.id]" class="text-blue-500 hover:underline">View details</button>
             </div>
           </div>
         </div>
