@@ -6,12 +6,14 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
 })
 export class LandingComponent implements AfterViewInit {
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  showPropertiesPopup = false;
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
