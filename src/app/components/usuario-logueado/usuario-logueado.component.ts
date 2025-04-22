@@ -4,10 +4,11 @@ import { Usuario } from '../../models/Usuario';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import AOS from 'aos';
 import { RouterLink } from '@angular/router';
+import { FooterComponent } from "../footer/footer.component";
 @Component({
   selector: 'app-usuario-logueado',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FooterComponent],
   templateUrl: './usuario-logueado.component.html',
   styleUrl: './usuario-logueado.component.css'
 })
