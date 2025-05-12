@@ -58,4 +58,13 @@ export class UsuarioService {
         throw error;
       });
   }
+  
+  getUsuarioById(id: number): Promise<Usuario | null> {
+    return axios.get<Usuario>(`${this.proyectoUrlUsuarios}/usuarios/${id}`)
+      .then(response => response.data)
+      .catch(error => {
+        console.error(`Error obteniendo el usuario con ID ${id}:`, error);
+        return null;
+      });
+  }
 }
