@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: autenticacion-frontend-ap
+  name: angular-app
   namespace: autenticacion-ap
 spec:
   selector:
     matchLabels:
-      app: autenticacion-frontend-ap
+      app: angular-app
   replicas: 1
   template:
     metadata:
       labels:
-        app: autenticacion-frontend-ap
+        app: angular-app
     spec:
       containers:
-        - name: autenticacion-frontend-ap
-          image: localhost:5000/auth-frontend-dev
+        - name: angular-app
+          image: localhost:5000/frontend
           ports:
             - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: autenticacion-frontend-ap
+  name: angular-app
   namespace: autenticacion-ap
 spec:
   # type: NodePort
   selector:
-    app: autenticacion-frontend-ap
+    app: angular-app
   ports:
     - protocol: TCP
       port: 80

@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: autenticacion-frontend-ap
+  name: angular-app
   namespace: autenticacion-ap
 spec:
   ingressClassName: public
@@ -13,6 +13,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: autenticacion-frontend-ap
+                name: angular-app
                 port:
                   number: 80
