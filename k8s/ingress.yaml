@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: public
   rules:
-    - host: devherramientassdde.desarrolloeconomico.gov.co
+    - host: devherramientassdde.desarrolloeconomico.gov.co //dejar en blanco
       http:
         paths:
           - path: /api

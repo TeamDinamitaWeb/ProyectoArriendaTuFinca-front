@@ -9,7 +9,7 @@ import AOS from 'aos';
 
 @Component({
   selector: 'app-create-account',
-  imports: [CommonModule, FormsModule, RouterOutlet, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   standalone: true,
   templateUrl: './create-account.component.html',
   styleUrl: './create-account.component.css'
