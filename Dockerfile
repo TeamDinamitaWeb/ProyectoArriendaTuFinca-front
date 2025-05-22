@@ -27,7 +27,7 @@ COPY ./k8s/my-httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY ./k8s/.htaccess /usr/local/apache2/htdocs/
 
 # Copiar la build de Angular al directorio público de Apache
-COPY --from=builder /app/dist/proyecto-angular /usr/local/apache2/htdocs/
+COPY --from=builder /app/dist/proyecto-angular/browser/ /usr/local/apache2/htdocs/
 
 # Exponer el puerto 80
 EXPOSE 80
