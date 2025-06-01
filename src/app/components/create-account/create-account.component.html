@@ -5,7 +5,8 @@
     data-aos="zoom-in"
     data-aos-duration="500"
     data-aos-easing="ease-in-out"
-    class="bg-white p-12 rounded-2xl shadow-lg w-full max-w-[600px] border border-gray-200 z-10 relative" >
+    class="bg-white p-12 rounded-2xl shadow-lg w-full max-w-[600px] border border-gray-200 z-10 relative" 
+    >
     <a routerLink="/" class="absolute top-8 left-10 text-gray-600 hover:text-gray-800 transition-colors duration-300">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -16,6 +17,7 @@
     <p class="text-center text-lg text-gray-600 mb-6">Create your account to start saving your favorite properties</p>
 
     <form (ngSubmit)="crearUsuario()" class="space-y-4">
+      <!-- First Name -->
       <div>
         <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
         <div class="relative">
@@ -28,6 +30,7 @@
         </div>
       </div>
 
+      <!-- Last Name -->
       <div>
         <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
         <div class="relative">
@@ -40,6 +43,7 @@
         </div>
       </div>
 
+      <!-- Correo -->
       <div>
         <label for="correo" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
         <div class="relative">
@@ -52,6 +56,7 @@
         </div>
       </div>
 
+      <!-- Contraseña -->
       <div>
         <label for="contraseña" class="block text-gray-700 text-sm font-bold mb-2">Create a password</label>
         <div class="relative">
@@ -64,17 +69,18 @@
         </div>
       </div>
 
+      <!-- Tipo de usuario -->
       <div class="flex justify-between gap-4">
         <button type="button"
-          (click)="usuario.tipoUsuario = 'ARRENDATARIO'"
-          [ngClass]="{'bg-blue-500 text-white': usuario.tipoUsuario === 'ARRENDATARIO', 'bg-gray-100 text-gray-700 hover:bg-gray-200': usuario.tipoUsuario !== 'ARRENDATARIO'}"
+          (click)="usuario.tipoUsuario = TipoUsuario.ARRENDATARIO"
+          [ngClass]="{'bg-blue-500 text-white': usuario.tipoUsuario === TipoUsuario.ARRENDATARIO, 'bg-gray-100 text-gray-700 hover:bg-gray-200': usuario.tipoUsuario !== TipoUsuario.ARRENDADOR}"
           class="flex-1 py-2 px-4 rounded-md border border-gray-300 font-semibold text-sm">
           Tenant
         </button>
 
         <button type="button"
-          (click)="usuario.tipoUsuario = 'ARRENDADOR'"
-          [ngClass]="{'bg-blue-500 text-white': usuario.tipoUsuario === 'ARRENDADOR', 'bg-gray-100 text-gray-700 hover:bg-gray-200': usuario.tipoUsuario !== 'ARRENDADOR'}"
+          (click)="usuario.tipoUsuario = TipoUsuario.ARRENDADOR"
+          [ngClass]="{'bg-blue-500 text-white': usuario.tipoUsuario === TipoUsuario.ARRENDADOR, 'bg-gray-100 text-gray-700 hover:bg-gray-200': usuario.tipoUsuario !== TipoUsuario.ARRENDADOR}"
           class="flex-1 py-2 px-4 rounded-md border border-gray-300 font-semibold text-sm">
           Landlord
         </button>
@@ -87,12 +93,14 @@
         </label>
       </div>
 
-      <button routerLink="/usuario-logueado" type="submit"
+      <!-- Botón submit -->
+      <button type="submit"
         class="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
         Sign Up
       </button>
     </form>
 
+    <!-- Redirección a login -->
     <div class="mt-4 text-center text-gray-600 text-sm">
       Already registered? <a routerLink="/login" class="no-underline text-blue-500 hover:underline">Log in</a>
     </div>

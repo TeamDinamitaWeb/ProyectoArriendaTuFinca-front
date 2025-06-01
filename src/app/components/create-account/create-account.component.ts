@@ -1,10 +1,13 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
-import { UsuarioService } from '../../services/usuario.service';
+import { Router } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import AOS from 'aos';
+import { TipoUsuario } from '../../enums/TipoUsuario';
+import { AuthService } from '../../services/JWT/auth.service';
+import { UsuarioService } from '../../services/usuario_services/usuario.service';
 
 
 @Component({
@@ -17,13 +20,15 @@ import AOS from 'aos';
 
 export class CreateAccountComponent {
 
-  usuario: Usuario = new Usuario('', '', '', '', '', '');
+  usuario: Usuario = new Usuario(0, '', '', '', TipoUsuario.ARRENDATARIO, '');
+  TipoUsuario = TipoUsuario;
 
   mensaje: string = '';
   error: string = '';
 
   constructor(
     private usuarioService: UsuarioService,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
   ngAfterViewInit(): void {
@@ -32,23 +37,21 @@ export class CreateAccountComponent {
     }
   }
 
-  crearUsuario(){
-    if (!this.usuario.nombre || !this.usuario.apellido || !this.usuario.correo || !this.usuario.contrasena || !this.usuario.tipoUsuario) {
-      this.error = 'Todos los campos son obligatorios';
-      this.mensaje = '';
+  crearUsuario(): void {
+    if (!this.usuario.tipoUsuario) {
+      alert('Debes seleccionar si eres arrendador o arrendatario.');
       return;
     }
 
-    this.usuarioService.postUsuario(this.usuario)
-      .then(usuarioCreado => {
-        this.mensaje = 'Usuario creado exitosamente';
-        this.error = '';
-        console.log('Usuario creado:', usuarioCreado);
-      })
-      .catch(error => {
-        this.error = 'Error al crear el usuario';
-        this.mensaje = '';
-        console.error('Error creando usuario:', error);
-      });
+    this.usuarioService.crearUsuario(this.usuario).subscribe({
+      next: () => {
+        alert('¡Cuenta creada exitosamente!');
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.error('Error al registrar el usuario:', err);
+        alert('No se pudo crear la cuenta. Verifica los datos e intenta de nuevo.');
+      }
+    });
   }
 }
