@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { Usuario } from '../../models/Usuario';
-import { UsuarioService } from '../../services/usuario.service';
 import AOS from 'aos';
 import { AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { UsuarioService } from '../../services/usuario_services/usuario.service';
 @Component({
   selector: 'app-update-usuario',
   standalone: true,
@@ -14,15 +14,15 @@ import { isPlatformBrowser } from '@angular/common';
   templateUrl: './update-usuario.component.html',
   styleUrl: './update-usuario.component.css'
 })
-export class UpdateUsuarioComponent implements OnInit, AfterViewInit {
-  usuario: Usuario = {
+export class UpdateUsuarioComponent implements /*OnInit,*/ AfterViewInit {
+  /*usuario: Usuario = {
     id: 0,
     nombre: 'juan',
     apellido: 'camargo',
     correo: 'xdxd@xd.com',
     contrasena: '',
     tipoUsuario: 'ARRENDATARIO'
-  };
+  };*/
   isLoading = true;
   errorMessage = '';
 
@@ -34,11 +34,11 @@ export class UpdateUsuarioComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     this.cargarUsuarioLogueado();
-  }
+  }*/
 
-  cargarUsuarioLogueado() {
+  /*cargarUsuarioLogueado() {
     this.isLoading = true;
     this.usuarioService.getUsuarios()
       .then(usuarios => {
@@ -73,5 +73,5 @@ export class UpdateUsuarioComponent implements OnInit, AfterViewInit {
         console.error('Error updating user:', error);
         this.isLoading = false;
       });
-  }
+  }*/
 }

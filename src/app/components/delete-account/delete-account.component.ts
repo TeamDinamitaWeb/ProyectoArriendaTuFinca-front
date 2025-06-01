@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UsuarioService } from '../../services/usuario.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UsuarioService } from '../../services/usuario_services/usuario.service';
 
 @Component({
   selector: 'app-delete-account',
@@ -16,10 +16,10 @@ export class DeleteAccountComponent {
   constructor(
     private usuarioService: UsuarioService
   ) { }
-
+  /*
   eliminar() {
     if (this.idUsuario > 0) {
-      this.usuarioService.deleteUsuario(this.idUsuario)
+      this.usuarioService.eliminarUsuario(this.idUsuario)
         .then(() => {
           alert('Usuario eliminado correctamente');
         })
@@ -29,5 +29,5 @@ export class DeleteAccountComponent {
     } else {
       alert('Por favor ingresa un ID válido');
     }
-  }
+  }*/
 }

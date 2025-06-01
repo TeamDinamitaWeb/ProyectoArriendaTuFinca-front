@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/Usuario';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import AOS from 'aos';
 import { RouterLink } from '@angular/router';
 import { FooterComponent } from "../footer/footer.component";
+import { UsuarioService } from '../../services/usuario_services/usuario.service';
 @Component({
   selector: 'app-usuario-logueado',
   standalone: true,
