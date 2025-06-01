@@ -3,10 +3,9 @@ import { Usuario } from '../../models/Usuario';
 import { Router } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import AOS from 'aos';
 import { TipoUsuario } from '../../enums/TipoUsuario';
-import { AuthService } from '../../services/JWT/auth.service';
 import { UsuarioService } from '../../services/usuario_services/usuario.service';
 
 
