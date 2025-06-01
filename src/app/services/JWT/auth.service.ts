@@ -1,21 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import {jwtDecode} from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost/jwt/security';
+  private apiUrl = 'http://localhost/jwt/security/autenticar';
 
   constructor(private http: HttpClient) {}
 
   login(credentials: { correo: string; contrasena: string }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/autenticar`, credentials).pipe(
-      tap(response => {
-        localStorage.setItem('jwt_token', response.token);
+    return this.http.post<string>(`${this.apiUrl}/autenticar-correo-contrasena`, null, {
+      params: {
+        correo: credentials.correo,
+        contrasena: credentials.contrasena
+      }
+    }).pipe(
+      tap(token => {
+        localStorage.setItem('jwt_token', token);
       })
     );
   }
@@ -36,7 +41,7 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       try {
-        return jwtDecode(token);
+        return JSON.parse(jwtDecode<any>(token).sub);
       } catch {
         return null;
       }

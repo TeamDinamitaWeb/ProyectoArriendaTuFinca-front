@@ -1,4 +1,4 @@
-import { EstadoSolicitud } from "../enums/EstadoSolicitud";
+import { EstadoSolicitud } from '../enums/EstadoSolicitud';
 
 export class Solicitud {
   constructor(
@@ -10,9 +10,9 @@ export class Solicitud {
     public fechaSolicitud: Date,
     public fechaInicio: Date,
     public fechaFin: Date,
-    public cantidadPersonas: number,
     public valor: number,
     public estado: EstadoSolicitud,
+    public cantidadPersonas: number,
     public status?: number
   ) {}
 }
