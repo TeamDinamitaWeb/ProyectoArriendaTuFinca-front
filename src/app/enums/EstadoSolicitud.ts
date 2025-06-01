@@ -1,0 +1,8 @@
+export enum EstadoSolicitud {
+    PENDIENTE = 'PENDIENTE',
+    APROBADA = 'APROBADA',
+    RECHAZADA = 'RECHAZADA',
+    PAGADA = 'PAGADA',
+    CALIFICADA = 'CALIFICADA',
+    CERRADA = 'CERRADA'
+}

@@ -1,15 +1,18 @@
-import { Propiedad } from "./Propiedad";
-import { Usuario } from "./Usuario";
+import { EstadoSolicitud } from "../enums/EstadoSolicitud";
 
-export class SolicitudArriendo {
-    constructor(
-        public id: number,
-        public arrendatario: Usuario,
-        public propiedad: Propiedad,
-        public fechaInicio: Date,
-        public fechaFin: Date,
-        public cantidadPersonas: number,
-        public estado: string,
-        public fechaSolicitud: Date
-    ) {}
+export class Solicitud {
+  constructor(
+    public id: number,
+    public propiedadId: number,
+    public arrendatarioId: number,
+    public nombrePropiedad: string,
+    public nombreSolicitante: string,
+    public fechaSolicitud: Date,
+    public fechaInicio: Date,
+    public fechaFin: Date,
+    public cantidadPersonas: number,
+    public valor: number,
+    public estado: EstadoSolicitud,
+    public status?: number
+  ) {}
 }

@@ -17,7 +17,7 @@ import AOS from 'aos';
 
 export class CreateAccountComponent {
 
-  usuario: Usuario = new Usuario(null, '', '', '', '', '');
+  usuario: Usuario = new Usuario('', '', '', '', '', '');
 
   mensaje: string = '';
   error: string = '';

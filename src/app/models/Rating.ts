@@ -1,15 +1,15 @@
-import { SolicitudArriendo } from "./SolicitudArriendo";
-import { Usuario } from "./Usuario";
-
 export class Rating {
-    constructor(
-        public id: number,
-        public solicitud: SolicitudArriendo,
-        public arrendador: Usuario,
-        public arrendatario: Usuario,
-        public calificacionFinca: number,
-        public comentarioFinca: string,
-        public calificacionArrendatario: number,
-        public comentarioArrendatario: string
-    ) {}
+  constructor(
+    public id: number,
+    public solicitudId: number,
+    public arrendadorId: number,
+    public arrendatarioId: number,
+    public nombreUsuario: string,
+    public nombrePropiedad: string,
+    public calificacionFinca: number,
+    public comentarioFinca: string,
+    public calificacionArrendatario: number,
+    public comentarioArrendatario: string,
+    public status?: number
+  ) {}
 }

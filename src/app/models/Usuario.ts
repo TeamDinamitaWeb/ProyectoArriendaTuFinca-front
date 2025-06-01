@@ -1,10 +1,13 @@
+import { TipoUsuario } from "../enums/TipoUsuario";
+
 export class Usuario {
-    constructor(
-        public id: number | null,
-        public nombre: string,
-        public apellido: string,
-        public correo: string,
-        public contrasena: string,
-        public tipoUsuario: string
-    ) {}
+  constructor(
+    public id: number,
+    public nombre: string,
+    public apellido: string,
+    public correo: string,
+    public tipoUsuario: TipoUsuario, 
+    public contrasena?: string,
+    public status?: number
+  ) {}
 }

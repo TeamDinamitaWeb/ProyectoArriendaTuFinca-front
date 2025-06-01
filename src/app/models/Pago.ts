@@ -1,13 +1,14 @@
-import { SolicitudArriendo } from "./SolicitudArriendo";
+import { EstadoPago } from "../enums/EstadoPago";
 
 export class Pago {
-    constructor(
-        public id: number,
-            public solicitud: SolicitudArriendo,
-            public valor: number,
-            public banco: string,
-            public numeroCuenta: string,
-            public fechaPago: Date,
-            public estado: string
-    ) {}
+  constructor(
+    public id: number,
+    public solicitudId: number,
+    public valor: number,
+    public banco: string,
+    public numeroCuenta: string,
+    public fechaPago: Date,
+    public estado: EstadoPago,
+    public status?: number
+  ) {}
 }
