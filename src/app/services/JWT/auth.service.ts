@@ -22,7 +22,6 @@ export class AuthService {
     );
   }
 
-
   logout(): void {
     localStorage.removeItem('jwt_token');
     localStorage.removeItem('usuario'); // También borramos el usuario

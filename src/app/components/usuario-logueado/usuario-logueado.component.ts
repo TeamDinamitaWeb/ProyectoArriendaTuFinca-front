@@ -1,10 +1,11 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { Usuario } from '../../models/Usuario';
+import { Component, Inject, OnInit, PLATFORM_ID, ChangeDetectorRef, HostListener, ElementRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import AOS from 'aos';
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FooterComponent } from "../footer/footer.component";
 import { UsuarioService } from '../../services/usuario_services/usuario.service';
+import { AuthService } from '../../services/JWT/auth.service';
 @Component({
   selector: 'app-usuario-logueado',
   standalone: true,
@@ -17,11 +18,13 @@ export class UsuarioLogueadoComponent implements OnInit{
   usuarioLogueado: any = null;
   mostrarMenuPerfil = false;
   
-  constructor(private usuarioService: UsuarioService, @Inject(PLATFORM_ID) private platformId: Object) {}
-
-  toggleMenuPerfil() {
-    this.mostrarMenuPerfil = !this.mostrarMenuPerfil;
-  }
+  constructor(
+    private usuarioService: UsuarioService,  
+    private router: Router, 
+    private authService: AuthService,  
+    private cdr: ChangeDetectorRef,
+    private eRef: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: Object) {}
 
   propiedades = [
     {
@@ -49,8 +52,24 @@ export class UsuarioLogueadoComponent implements OnInit{
       AOS.init();
     }
 
-    // Obtener datos del usuario desde el token
+    // Obtener usuario desde token decodificado
     this.usuarioLogueado = this.usuarioService.getUsuarioDesdeToken();
-      console.log('Usuario logueado:', this.usuarioLogueado);
+    this.cdr.detectChanges();
+  }
+
+  toggleMenuPerfil() {
+    this.mostrarMenuPerfil = !this.mostrarMenuPerfil;
+  }
+
+  @HostListener('document:click', ['$event'])
+  cerrarMenuAlHacerClickAfuera(event: MouseEvent) {
+    if (this.mostrarMenuPerfil && !this.eRef.nativeElement.contains(event.target)) {
+      this.mostrarMenuPerfil = false;
+    }
+  }
+  
+  cerrarSesion() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

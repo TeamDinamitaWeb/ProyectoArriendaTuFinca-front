@@ -1,71 +1,4 @@
-<!--<h1 class="text-4xl text-blue-500 font-bold text-center mt-10">
-    {{ title }}
-  </h1>
-  
-   Tabla de usuarios
-  <table class="table-auto border-collapse w-full mt-6">
-    <thead>
-      <tr>
-        <th class="border px-4 py-2">ID</th>
-        <th class="border px-4 py-2">Nombre</th>
-        <th class="border px-4 py-2">Apellido</th>
-        <th class="border px-4 py-2">Correo</th>
-        <th class="border px-4 py-2">Tipo de Usuario</th>
-        <th class="border px-4 py-2">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let usuario of usuarios">
-        <td class="border px-4 py-2">{{ usuario.id }}</td>
-        <td class="border px-4 py-2">{{ usuario.nombre }}</td>
-        <td class="border px-4 py-2">{{ usuario.apellido }}</td>
-        <td class="border px-4 py-2">{{ usuario.correo }}</td>
-        <td class="border px-4 py-2">{{ usuario.tipoUsuario }}</td>
-        <td class="border px-4 py-2">
-          <button class="bg-yellow-400 text-white px-2 py-1 rounded" (click)="seleccionarUsuario(usuario)">
-            Editar
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
-   Formulario de edición
-  <div *ngIf="usuarioEditando" class="mt-8 p-4 border rounded bg-gray-100 max-w-xl mx-auto">
-    <h2 class="text-2xl font-semibold mb-4">Editar Usuario</h2>
-    <form (ngSubmit)="actualizarUsuario()">
-      <div class="mb-2">
-        <label for="nombre" class="block">Nombre:</label>
-        <input [(ngModel)]="usuarioEditando.nombre" name="nombre" id="nombre" class="w-full p-2 border rounded" />
-      </div>
-      <div class="mb-2">
-        <label for="apellido" class="block">Apellido:</label>
-        <input [(ngModel)]="usuarioEditando.apellido" name="apellido" id="apellido" class="w-full p-2 border rounded" />
-      </div>
-      <div class="mb-2">
-        <label for="correo" class="block">Correo:</label>
-        <input [(ngModel)]="usuarioEditando.correo" name="correo" id="correo" class="w-full p-2 border rounded" />
-      </div>
-      <div class="mb-2">
-        <label for="tipoUsuario" class="block">Tipo de Usuario:</label>
-        <input [(ngModel)]="usuarioEditando.tipoUsuario" name="tipoUsuario" id="tipoUsuario" class="w-full p-2 border rounded" />
-      </div>
-      <div class="mb-2">
-        <label for="contrasena" class="block">Contraseña:</label>
-        <input [(ngModel)]="usuarioEditando.contrasena" name="contraseña" id="contrasena" type="password" class="w-full p-2 border rounded" />
-      </div>
-  
-      <div class="flex gap-4 mt-4">
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Guardar</button>
-        <button type="button" class="bg-gray-400 text-white px-4 py-2 rounded" (click)="cancelarEdicion()">Cancelar</button>
-      </div>
-    </form>
-  </div>
-  <router-outlet></router-outlet>-->
-
-<!---
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 <div class="animated-background min-h-screen flex items-center justify-center">
   <div
     data-aos="zoom-in"
@@ -76,11 +9,13 @@
     <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Edit Profile</h2>
     <p class="text-center text-lg text-gray-600 mb-6">Update your account information</p>
 
-    <form (ngSubmit)="guardarCambios()" class="space-y-4">
+    <form #form="ngForm" (ngSubmit)="guardarCambios()" class="space-y-4" [class.opacity-50]="isLoading" [class.pointer-events-none]="isLoading">
+      <!-- Nombre -->
       <div>
         <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
         <div class="relative">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+            class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
           </svg>
           <input type="text" id="nombre" [(ngModel)]="usuario.nombre" name="nombre"
@@ -89,10 +24,12 @@
         </div>
       </div>
 
+      <!-- Apellido -->
       <div>
         <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
         <div class="relative">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+            class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
           </svg>
           <input type="text" id="apellido" [(ngModel)]="usuario.apellido" name="apellido"
@@ -101,11 +38,14 @@
         </div>
       </div>
 
+      <!-- Correo -->
       <div>
         <label for="correo" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
         <div class="relative">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.913A2.25 2.25 0 012.25 6.75v10.5" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.913A2.25 2.25 0 012.25 6.75v10.5" />
           </svg>
           <input type="email" id="correo" [(ngModel)]="usuario.correo" name="correo"
             class="w-full pl-10 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-300"
@@ -113,44 +53,51 @@
         </div>
       </div>
 
+      <!-- Contraseña -->
       <div>
-        <label for="contraseña" class="block text-gray-700 text-sm font-bold mb-2">New Password (leave blank to keep current)</label>
+        <label for="contrasena" class="block text-gray-700 text-sm font-bold mb-2">New Password (leave blank to keep current)</label>
         <div class="relative">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 absolute left-[12px] top-1/2 transform -translate-y-[110%] text-gray-400">
-            <path fill-rule="evenodd" d="M10 1a4 4 0 00-4 4v10a4 4 0 004 4h6a4 4 0 004-4V5a4 4 0 00-4-4H10zm-3 3a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H8a1 1 0 01-1-1V4zm6 9a1 1 0 10-2 0v3a1 1 0 102 0v-3z" clip-rule="evenodd" />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+            class="w-5 h-5 absolute left-[12px] top-1/2 transform -translate-y-[110%] text-gray-400">
+            <path fill-rule="evenodd"
+              d="M10 1a4 4 0 00-4 4v10a4 4 0 004 4h6a4 4 0 004-4V5a4 4 0 00-4-4H10zm-3 3a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H8a1 1 0 01-1-1V4zm6 9a1 1 0 10-2 0v3a1 1 0 102 0v-3z"
+              clip-rule="evenodd" />
           </svg>
-          <input type="password" id="contraseña" [(ngModel)]="usuario.contrasena" name="contraseña"
+          <input type="password" id="contrasena" [(ngModel)]="usuario.contrasena" name="contrasena"
             class="w-full pl-10 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-300"
             placeholder="Your new password" />
           <small class="text-gray-500 text-xs italic">Leave blank to keep your current password.</small>
         </div>
       </div>
 
+      <!-- Tipo de cuenta -->
       <div class="flex justify-between gap-4">
         <label class="block text-gray-700 text-sm font-bold mb-2 w-full">Account Type:</label>
         <button type="button"
-          (click)="usuario.tipoUsuario = 'ARRENDATARIO'"
-          [ngClass]="{'bg-blue-500 text-white': usuario.tipoUsuario === 'ARRENDATARIO', 'bg-gray-100 text-gray-700 hover:bg-gray-200': usuario.tipoUsuario !== 'ARRENDATARIO'}"
+          (click)="usuario.tipoUsuario = tipoUsuarioEnum.ARRENDATARIO"
+          [ngClass]="{'bg-blue-500 text-white': usuario.tipoUsuario === tipoUsuarioEnum.ARRENDATARIO, 'bg-gray-100 text-gray-700 hover:bg-gray-200': usuario.tipoUsuario !== tipoUsuarioEnum.ARRENDATARIO}"
           class="flex-1 py-2 px-4 rounded-md border border-gray-300 font-semibold text-sm">
           Tenant
         </button>
-
         <button type="button"
-          (click)="usuario.tipoUsuario = 'ARRENDADOR'"
-          [ngClass]="{'bg-blue-500 text-white': usuario.tipoUsuario === 'ARRENDADOR', 'bg-gray-100 text-gray-700 hover:bg-gray-200': usuario.tipoUsuario !== 'ARRENDADOR'}"
+          (click)="usuario.tipoUsuario = tipoUsuarioEnum.ARRENDADOR"
+          [ngClass]="{'bg-blue-500 text-white': usuario.tipoUsuario === tipoUsuarioEnum.ARRENDADOR, 'bg-gray-100 text-gray-700 hover:bg-gray-200': usuario.tipoUsuario !== tipoUsuarioEnum.ARRENDADOR}"
           class="flex-1 py-2 px-4 rounded-md border border-gray-300 font-semibold text-sm">
           Landlord
         </button>
       </div>
 
+      <!-- Guardar -->
       <button type="submit"
-        class="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+        class="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+        [disabled]="form.invalid || isLoading">
         Save Changes
       </button>
     </form>
 
+    <!-- Volver -->
     <div class="mt-4 text-center text-gray-600 text-sm">
-      <a href="/usuario-logueado" class="no-underline text-blue-500">Back to home</a>
+      <a routerLink="/usuario-logueado" class="no-underline text-blue-500">Back to home</a>
     </div>
   </div>
-</div>-->
+</div>

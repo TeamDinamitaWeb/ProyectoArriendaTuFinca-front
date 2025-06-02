@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../../models/Usuario';
 import { jwtDecode } from 'jwt-decode';
+import { TipoUsuario } from '../../enums/TipoUsuario';
+import { TokenDTO } from '../../models/Token';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +37,8 @@ export class UsuarioService {
 
 
   // Actualizar usuario
-  actualizarUsuario(id: number, usuario: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.apiUrl}/${id}`, usuario);
+  actualizarUsuario(id: number, usuario: Usuario): Observable<TokenDTO> {
+    return this.http.put<TokenDTO>(`${this.apiUrl}/${id}`, usuario);
   }
 
   // Eliminar usuario
@@ -44,15 +46,23 @@ export class UsuarioService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  getUsuarioDesdeToken(): any {
+  getUsuarioDesdeToken(): Usuario | null {
     const token = localStorage.getItem('jwt_token');
-    if (token) {
-      try {
-        return JSON.parse(jwtDecode<any>(token).sub);
-      } catch {
-        return null;
-      }
+    if (!token) return null;
+
+    try {
+      const payload = jwtDecode<any>(token);
+      return new Usuario(
+        payload.nombre,
+        payload.apellido,
+        payload.sub, // correo
+        payload.tipoUsuario as TipoUsuario,
+        undefined, // contraseña no la necesitas aquí
+        payload.status,
+        payload.id
+      );
+    } catch {
+      return null;
     }
-    return null;
   }
 }

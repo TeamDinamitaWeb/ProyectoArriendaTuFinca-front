@@ -7,6 +7,8 @@ import AOS from 'aos';
 import { AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { UsuarioService } from '../../services/usuario_services/usuario.service';
+import { TipoUsuario } from '../../enums/TipoUsuario';
+import { TokenDTO } from '../../models/Token';
 @Component({
   selector: 'app-update-usuario',
   standalone: true,
@@ -14,19 +16,33 @@ import { UsuarioService } from '../../services/usuario_services/usuario.service'
   templateUrl: './update-usuario.component.html',
   styleUrl: './update-usuario.component.css'
 })
-export class UpdateUsuarioComponent implements /*OnInit,*/ AfterViewInit {
-  /*usuario: Usuario = {
-    id: 0,
-    nombre: 'juan',
-    apellido: 'camargo',
-    correo: 'xdxd@xd.com',
-    contrasena: '',
-    tipoUsuario: 'ARRENDATARIO'
-  };*/
+export class UpdateUsuarioComponent implements OnInit, AfterViewInit {
+  
+  usuario: Usuario = new Usuario('', '', '', TipoUsuario.ARRENDATARIO, '');
+  tipoUsuarioEnum = TipoUsuario;
+
   isLoading = true;
   errorMessage = '';
 
   constructor(private usuarioService: UsuarioService, @Inject(PLATFORM_ID) private platformId: Object) {}
+
+  ngOnInit(): void {
+    const userData = this.usuarioService.getUsuarioDesdeToken();
+    if (userData) {
+      this.usuario = new Usuario(
+        userData.nombre,
+        userData.apellido,
+        userData.correo,
+        userData.tipoUsuario,
+        '', // contraseña vacía para no mostrarla
+        userData.status,
+        userData.id
+      );
+    } else {
+      this.errorMessage = 'Error: No se pudo obtener el usuario desde el token.';
+    }
+    this.isLoading = false;
+  }
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -34,44 +50,19 @@ export class UpdateUsuarioComponent implements /*OnInit,*/ AfterViewInit {
     }
   }
 
-  /*ngOnInit(): void {
-    this.cargarUsuarioLogueado();
-  }*/
-
-  /*cargarUsuarioLogueado() {
-    this.isLoading = true;
-    this.usuarioService.getUsuarios()
-      .then(usuarios => {
-        if (usuarios && usuarios.length > 0) {
-          // For now, we're taking the first user as the logged-in user
-          this.usuario = { ...usuarios[0] };
-          this.isLoading = false;
-        } else {
-          this.errorMessage = 'No users found.';
-          this.isLoading = false;
-        }
-      })
-      .catch(error => {
-        this.errorMessage = 'Error loading user data.';
-        console.error('Error loading user:', error);
-        this.isLoading = false;
-      });
-  }
-
   guardarCambios() {
     this.isLoading = true;
-    this.errorMessage = '';
-    this.usuarioService.putUsuario(this.usuario)
-      .then(() => {
-        alert('User profile updated successfully!');
+    this.usuarioService.actualizarUsuario(this.usuario.id!, this.usuario).subscribe({
+      next: (respuesta: TokenDTO) => {
+        localStorage.setItem('jwt_token', respuesta.token);
+        alert('Perfil actualizado correctamente.');
         this.isLoading = false;
-        // Optionally navigate the user back to the profile page
-        // this.router.navigate(['/usuario-logueado']);
-      })
-      .catch(error => {
-        this.errorMessage = 'Error updating user profile.';
-        console.error('Error updating user:', error);
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorMessage = 'Error al actualizar el perfil.';
         this.isLoading = false;
-      });
-  }*/
+      }
+    });
+  }
 }
