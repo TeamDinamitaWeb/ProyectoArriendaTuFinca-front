@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../../models/Usuario';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,17 @@ export class UsuarioService {
   // Eliminar usuario
   eliminarUsuario(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  getUsuarioDesdeToken(): any {
+    const token = localStorage.getItem('jwt_token');
+    if (token) {
+      try {
+        return JSON.parse(jwtDecode<any>(token).sub);
+      } catch {
+        return null;
+      }
+    }
+    return null;
   }
 }

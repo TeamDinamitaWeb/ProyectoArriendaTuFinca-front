@@ -13,17 +13,11 @@ import { UsuarioService } from '../../services/usuario_services/usuario.service'
   styleUrl: './usuario-logueado.component.css'
 })
 export class UsuarioLogueadoComponent implements OnInit{
-  //usuarioLogueado: Usuario | null = null;
-
-  constructor(private usuarioService: UsuarioService, @Inject(PLATFORM_ID) private platformId: Object) {}
-
-  usuarioLog = [
-    {
-      nombre: 'Juan Martin Sanchez'
-    }
-  ]
-  usuarioLogueado = this.usuarioLog[0];
+  
+  usuarioLogueado: any = null;
   mostrarMenuPerfil = false;
+  
+  constructor(private usuarioService: UsuarioService, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   toggleMenuPerfil() {
     this.mostrarMenuPerfil = !this.mostrarMenuPerfil;
@@ -51,20 +45,12 @@ export class UsuarioLogueadoComponent implements OnInit{
   ];
 
   ngOnInit(): void {
-    //this.obtenerUsuarioLogueado();
     if (isPlatformBrowser(this.platformId)) {
       AOS.init();
     }
-  }
 
-  /*obtenerUsuarioLogueado() {
-    this.usuarioService.getUsuarios()
-      .then(usuario => {
-        this.usuarioLogueado = usuario[0];
-        console.log('Usuario logueado:', this.usuarioLogueado);
-      })
-      .catch(error => {
-        console.error('Error obteniendo el usuario logueado:', error);
-      });
-  }*/
+    // Obtener datos del usuario desde el token
+    this.usuarioLogueado = this.usuarioService.getUsuarioDesdeToken();
+      console.log('Usuario logueado:', this.usuarioLogueado);
+  }
 }
