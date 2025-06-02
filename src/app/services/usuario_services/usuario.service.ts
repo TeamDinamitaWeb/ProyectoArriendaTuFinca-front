@@ -8,7 +8,7 @@ import { Usuario } from '../../models/Usuario';
 })
 export class UsuarioService {
 
-  private apiUrl = 'http://localhost/api/usuarios';
+  private apiUrl = 'http://localhost:8081/api/usuarios';
 
   constructor(private http: HttpClient) {}
 
@@ -29,8 +29,9 @@ export class UsuarioService {
 
   // Crear nuevo usuario
   crearUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.apiUrl, usuario);
+    return this.http.post<Usuario>(`${this.apiUrl}/crear`, usuario);
   }
+
 
   // Actualizar usuario
   actualizarUsuario(id: number, usuario: Usuario): Observable<Usuario> {

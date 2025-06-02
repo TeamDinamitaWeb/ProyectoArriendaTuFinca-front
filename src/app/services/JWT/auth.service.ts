@@ -2,31 +2,30 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { TokenDTO } from '../../models/Token';
+import { Usuario } from '../../models/Usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost/jwt/security/autenticar';
+  private apiUrl = 'http://localhost:8081/jwt/security/autenticar';
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { correo: string; contrasena: string }): Observable<any> {
-    return this.http.post<string>(`${this.apiUrl}/autenticar-correo-contrasena`, null, {
-      params: {
-        correo: credentials.correo,
-        contrasena: credentials.contrasena
-      }
-    }).pipe(
-      tap(token => {
-        localStorage.setItem('jwt_token', token);
+  login(credentials: { correo: string; contrasena: string }): Observable<TokenDTO> {
+    return this.http.post<TokenDTO>(`${this.apiUrl}/autenticar`, credentials).pipe(
+      tap((response) => {
+        localStorage.setItem('jwt_token', response.token);
       })
     );
   }
 
+
   logout(): void {
     localStorage.removeItem('jwt_token');
+    localStorage.removeItem('usuario'); // También borramos el usuario
   }
 
   getToken(): string | null {
@@ -35,6 +34,11 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+  getUsuario(): Usuario | null {
+    const usuarioStr = localStorage.getItem('usuario');
+    return usuarioStr ? JSON.parse(usuarioStr) : null;
   }
 
   getUserInfo(): any {

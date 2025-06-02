@@ -1,31 +1,45 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { Usuario } from '../../models/Usuario';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import AOS from 'aos';
-import { UsuarioService } from '../../services/usuario_services/usuario.service';
+import { AuthService } from '../../services/JWT/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, FormsModule, RouterModule],
   standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  /*usuario: Usuario = new Usuario(null, '', '', '', '', '');*/
-  mensaje: string = '';
+  correo: string = '';
+  contrasena: string = '';
+
   constructor(
-      private usuarioService: UsuarioService,
-      @Inject(PLATFORM_ID) private platformId: Object
-    ) { }
-  
-    ngAfterViewInit(): void {
-     if (isPlatformBrowser(this.platformId)) {
-       AOS.init();
-     }
+    private authService: AuthService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
+
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      AOS.init();
     }
-  login(){}
+  }
+
+  login() {
+    this.authService.login({ correo: this.correo, contrasena: this.contrasena }).subscribe({
+      next: (response) => {
+        localStorage.setItem('jwt', response.token);
+        this.router.navigate(['/usuario-logueado']);
+      },
+      error: (err) => {
+        console.error('Login failed:', err);
+        alert(err?.error?.message || 'Credenciales inválidas. Intenta de nuevo.');
+      }
+    });
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Usuario } from '../../models/Usuario';
 import { Router } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
@@ -11,15 +11,15 @@ import { UsuarioService } from '../../services/usuario_services/usuario.service'
 
 @Component({
   selector: 'app-create-account',
-  imports: [CommonModule, FormsModule, RouterModule],
   standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './create-account.component.html',
-  styleUrl: './create-account.component.css'
+  styleUrls: ['./create-account.component.css']
 })
 
-export class CreateAccountComponent {
+export class CreateAccountComponent implements AfterViewInit {
 
-  usuario: Usuario = new Usuario(0, '', '', '', TipoUsuario.ARRENDATARIO, '');
+  usuario: Usuario = new Usuario('', '', '', TipoUsuario.ARRENDATARIO, '');
   TipoUsuario = TipoUsuario;
 
   mensaje: string = '';
@@ -30,6 +30,7 @@ export class CreateAccountComponent {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
+
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       AOS.init();

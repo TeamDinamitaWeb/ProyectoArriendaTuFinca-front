@@ -1,4 +1,4 @@
-<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -7,12 +7,14 @@
     data-aos="zoom-in"
     data-aos-duration="500"
     data-aos-easing="ease-in-out"
-    class="bg-white p-12 rounded-2xl shadow-lg w-full max-w-[600px] border border-gray-200 z-10">
+    class="bg-white p-12 rounded-2xl shadow-lg w-full max-w-[600px] border border-gray-200 z-10"
+    >
     <a routerLink="/" class="absolute top-8 left-10 text-gray-600 hover:text-gray-800 transition-colors duration-300">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
       </svg>
     </a>
+
     <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Log In</h2>
     <p class="text-center text-lg text-gray-600 mb-6">Sign in to access your account and saved properties</p>
 
@@ -23,19 +25,19 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.913A2.25 2.25 0 012.25 6.75v10.5" />
           </svg>
-          <input type="email" id="correo" [(ngModel)]="usuario.correo" name="correo"
+          <input type="email" id="correo" [(ngModel)]="correo" name="correo"
             class="w-full pl-10 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-300"
             placeholder="Your email address" required />
         </div>
       </div>
 
       <div>
-        <label for="contraseña" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+        <label for="contrasena" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
         <div class="relative">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 absolute left-[12px] top-1/2 transform -translate-y-1/2 text-gray-400">
             <path fill-rule="evenodd" d="M10 1a4 4 0 00-4 4v10a4 4 0 004 4h6a4 4 0 004-4V5a4 4 0 00-4-4H10zm-3 3a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H8a1 1 0 01-1-1V4zm6 9a1 1 0 10-2 0v3a1 1 0 102 0v-3z" clip-rule="evenodd" />
           </svg>
-          <input type="password" id="contraseña" [(ngModel)]="usuario.contrasena" name="contraseña"
+          <input type="password" id="contrasena" [(ngModel)]="contrasena" name="contrasena"
             class="w-full pl-10 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-300"
             placeholder="Your secure password" required />
         </div>
@@ -51,4 +53,4 @@
       Don't have an account? <a routerLink="/create-account" class="no-underline text-blue-500 hover:underline">Sign Up</a>
     </div>
   </div>
-</div>-->
+</div>-

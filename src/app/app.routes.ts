@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { LoginComponent } from './components/login/login.component';
 import { DeleteAccountComponent } from './components/delete-account/delete-account.component';
@@ -23,8 +22,3 @@ export const routes: Routes = [
   { path: '**', redirectTo: '' },
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)], // ✅ Importante esto
-  exports: [RouterModule] // ✅ Exportar para usar en AppModule
-})
-export class AppRoutingModule {}
