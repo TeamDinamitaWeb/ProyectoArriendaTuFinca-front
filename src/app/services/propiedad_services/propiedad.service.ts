@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Propiedad } from '../../models/Propiedad';
 
@@ -7,7 +7,7 @@ import { Propiedad } from '../../models/Propiedad';
   providedIn: 'root'
 })
 export class PropiedadService {
-  private apiUrl = 'http://localhost/api/propiedades';
+  private apiUrl = 'http://localhost:8081/api/propiedades';
 
   constructor(private http: HttpClient) {}
 
@@ -28,7 +28,14 @@ export class PropiedadService {
 
   // Crear nueva propiedad
   crearPropiedad(propiedad: Propiedad): Observable<Propiedad> {
-    return this.http.post<Propiedad>(this.apiUrl, propiedad);
+    const token = localStorage.getItem('jwt_token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<Propiedad>(this.apiUrl, propiedad, { headers });
   }
 
   // Actualizar propiedad

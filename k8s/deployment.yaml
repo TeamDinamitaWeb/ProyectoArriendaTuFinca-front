@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: angular-app
-          image: localhost:5000/frontend
+          image: localhost:5000/despliegueangular
           ports:
             - containerPort: 80
 ---
@@ -31,44 +31,3 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: tufinca-backend
-  namespace: autenticacion-ap
-spec:
-  selector:
-    matchLabels:
-      app: tufinca-backend
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: tufinca-backend
-    spec:
-      containers:
-        - name: tufinca-backend
-          image: localhost:5000/backend
-          ports:
-            - containerPort: 8081
-          env:
-            - name: SPRING_DATASOURCE_URL
-              value: "jdbc:mysql://10.43.103.142:3306/proyectoweb"
-            - name: SPRING_DATASOURCE_USERNAME
-              value: "tufinca_user"
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: "password"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: tufinca-backend
-  namespace: autenticacion-ap
-spec:
-  selector:
-    app: tufinca-backend
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8081

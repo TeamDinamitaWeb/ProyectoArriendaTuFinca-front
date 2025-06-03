@@ -7,7 +7,7 @@ import { Solicitud } from '../../models/SolicitudArriendo';
   providedIn: 'root'
 })
 export class SolicitudService {
-  private apiUrl = 'http://localhost/api/solicitudes';
+  private apiUrl = 'http://localhost:8081/api/solicitudes';
 
   constructor(private http: HttpClient) {}
 

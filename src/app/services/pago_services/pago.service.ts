@@ -7,7 +7,7 @@ import { Pago } from '../../models/Pago';
   providedIn: 'root'
 })
 export class PagoService {
-  private apiUrl = 'http://localhost/api/pagos';
+  private apiUrl = 'http://localhost:8081/api/pagos';
 
   constructor(private http: HttpClient) {}
 

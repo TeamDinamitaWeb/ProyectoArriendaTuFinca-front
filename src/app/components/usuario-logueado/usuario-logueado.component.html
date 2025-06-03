@@ -47,6 +47,14 @@
               Edit Profile
             </a>
 
+            <!-- SOLO SI ES ARRENDADOR -->
+            <a *ngIf="usuarioLogueado?.tipoUsuario === 'ARRENDADOR'" 
+              routerLink="/publicar-propiedad"
+              class="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition">
+              <i class="fas fa-plus-circle w-4 no-underline"></i>
+              Publicar propiedad
+            </a>
+
             <button (click)="cerrarSesion()"
                     class="flex items-center gap-2 px-4 py-2 w-full text-left text-sm text-red-600 hover:bg-red-50 transition">
               <i class="fas fa-sign-out-alt w-4"></i>

@@ -8,6 +8,7 @@ import { UsuarioLogueadoComponent } from './components/usuario-logueado/usuario-
 import { PropertiesComponent } from './components/properties/properties.component';
 import { VerUsuariosComponent } from './components/admin/ver-usuarios/ver-usuarios.component';
 import { VerPropiedadComponent } from './components/ver-propiedad/ver-propiedad.component';
+import { PublicarPropiedadComponent } from './components/publicar-propiedad/publicar-propiedad.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'properties', component: PropertiesComponent },
   { path: 'ver-usuarios', component: VerUsuariosComponent },
   { path: 'propiedad/:id', component: VerPropiedadComponent },
+  { path: 'publicar-propiedad', component: PublicarPropiedadComponent },
   { path: '**', redirectTo: '' },
 ];
 

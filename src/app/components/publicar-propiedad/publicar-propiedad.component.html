@@ -1,0 +1,74 @@
+<div class="animated-background min-h-screen flex items-center justify-center px-4">
+  <div
+    data-aos="zoom-in"
+    data-aos-duration="500"
+    data-aos-easing="ease-in-out"
+    class="bg-white p-10 rounded-2xl shadow-lg w-full max-w-[700px] border border-gray-200 z-10"
+  >
+    <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Publish Property</h2>
+    <p class="text-center text-lg text-gray-600 mb-6">Fill in the details to list your property</p>
+
+    <form (ngSubmit)="publicarPropiedad()" class="space-y-4">
+
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Title</label>
+        <input [(ngModel)]="propiedad.titulo" name="titulo" type="text"
+               class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
+               placeholder="e.g. Beautiful Country House" required />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Description</label>
+        <textarea [(ngModel)]="propiedad.descripcion" name="descripcion"
+                  class="w-full px-4 py-2 border border-gray-300 rounded resize-none focus:outline-none focus:ring focus:ring-blue-200"
+                  rows="3" placeholder="Write a short description" required></textarea>
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Address</label>
+        <input [(ngModel)]="propiedad.direccion" name="direccion" type="text"
+               class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
+               placeholder="Exact address" required />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-semibold mb-1">Municipality</label>
+        <input [(ngModel)]="propiedad.municipio" name="municipio" type="text"
+               class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
+               placeholder="e.g. Medellín, Bogotá" required />
+      </div>
+
+      <div class="flex gap-4">
+        <div class="flex-1">
+          <label class="block text-gray-700 font-semibold mb-1">Capacity</label>
+          <input [(ngModel)]="propiedad.capacidad" name="capacidad" type="number"
+                 class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
+                 min="1" required />
+        </div>
+
+        <div class="flex-1">
+          <label class="block text-gray-700 font-semibold mb-1">Price per Night</label>
+          <input [(ngModel)]="propiedad.precioPorNoche" name="precioPorNoche" type="number"
+                 class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
+                 min="0" required />
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-col items-center gap-4">
+        <button
+            type="submit"
+            class="w-full sm:w-auto px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md transition">
+            Publish Property
+        </button>
+
+        <button
+            routerLink="/usuario-logueado"
+            class="w-full sm:w-auto px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-md shadow-md transition"
+        >
+            Back to Home
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -3,7 +3,6 @@ import { Usuario } from "./Usuario";
 
 export class Propiedad {
   constructor(
-    public id: number,
     public titulo: string,
     public descripcion: string,
     public direccion: string,
@@ -12,6 +11,7 @@ export class Propiedad {
     public precioPorNoche: number,
     public estado: EstadoPropiedad,
     public usuario?: Usuario, // Mostrar info del dueño
-    public status?: number    // Solo se maneja elementos eliminados
+    public status?: number,    // Solo se maneja elementos eliminados
+    public id?: number
   ) {}
 }
