@@ -35,7 +35,6 @@ export class UsuarioService {
     return this.http.post<Usuario>(`${this.apiUrl}/crear`, usuario);
   }
 
-
   // Actualizar usuario
   actualizarUsuario(id: number, usuario: Usuario): Observable<TokenDTO> {
     return this.http.put<TokenDTO>(`${this.apiUrl}/${id}`, usuario);

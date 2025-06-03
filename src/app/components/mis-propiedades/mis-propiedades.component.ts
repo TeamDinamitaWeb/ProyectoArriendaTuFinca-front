@@ -7,6 +7,7 @@ import { UsuarioService } from '../../services/usuario_services/usuario.service'
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import Aos from 'aos';
 import { FormsModule } from '@angular/forms';
+import { EstadoPropiedad } from '../../enums/EstadoPropiedad';
 
 @Component({
   selector: 'app-mis-propiedades',
@@ -20,7 +21,9 @@ export class MisPropiedadesComponent {
   propiedades: Propiedad[] = [];
   propiedadesFiltradas: Propiedad[] = [];
   mostrarModal = false;
-  propiedadEditando: Propiedad = new Propiedad();
+  propiedadEditando: Partial<Propiedad> = {}; // ahora es parcial para evitar constructor obligatorio
+  estadoEnum = EstadoPropiedad;
+
 
   constructor(
     private usuarioService: UsuarioService,
@@ -29,7 +32,7 @@ export class MisPropiedadesComponent {
     @Inject(PLATFORM_ID) private platformId: Object 
   ) {}
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       Aos.init();
     }
@@ -38,26 +41,26 @@ export class MisPropiedadesComponent {
     if (usuarioLogueado) {
       this.usuario = usuarioLogueado;
 
-      this.propiedadService.obtenerTodos().subscribe({
-        next: (todas) => {
-          this.propiedadesFiltradas = todas.filter(p => p.usuarioId === this.usuario?.id);
-        },
-        error: (err) => {
-          console.error('Error al cargar propiedades:', err);
-        }
-      });
+      this.obtenerPropiedades();
     }
+  }
+  
+  obtenerPropiedades() {
+    this.propiedadService.obtenerTodos().subscribe({
+      next: (todas) => {
+        this.propiedadesFiltradas = todas.filter(p => p.usuarioId === this.usuario?.id);
+      },
+      error: (err) => {
+        console.error('Error al cargar propiedades:', err);
+      }
+    });
   }
 
   volverAlDashboard() {
     this.router.navigate(['/usuario-logueado']);
   }
 
-  editarPropiedad(id: number) {
-    this.router.navigate(['/editar-propiedad', id]);
-  }
-
-  eliminarPropiedad(id?: number) {
+   eliminarPropiedad(id?: number) {
     if (id == null) {
       alert("Property ID is invalid.");
       return;
@@ -81,5 +84,24 @@ export class MisPropiedadesComponent {
   abrirModal(propiedad: Propiedad) {
     this.propiedadEditando = { ...propiedad }; // clonamos para no afectar el array
     this.mostrarModal = true;
+  }
+
+  // Ocultar modal
+  cerrarModal() {
+    this.mostrarModal = false;
+  }
+
+  // Guardar cambios
+  guardarCambios() {
+    if (!this.propiedadEditando.id) return;
+
+    this.propiedadService.actualizarPropiedad(this.propiedadEditando.id, this.propiedadEditando as Propiedad).subscribe({
+      next: () => {
+        alert('Property updated successfully');
+        this.obtenerPropiedades();
+        this.cerrarModal();
+      },
+      error: () => alert('Error updating property')
+    });
   }
 }

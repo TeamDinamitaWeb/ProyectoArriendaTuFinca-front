@@ -39,14 +39,14 @@
 
           <!-- Botones de acción -->
           <div class="flex justify-between mt-6">
-            <button (click)="editarPropiedad(propiedad.id!)"
+            <button (click)="abrirModal(propiedad)"
                     class="text-blue-600 border border-blue-600 px-4 py-1 rounded-full hover:bg-blue-50 transition text-sm">
               <i class="fas fa-edit mr-1"></i> Edit
             </button>
 
             <button (click)="eliminarPropiedad(propiedad.id!)"
                     class="text-red-600 border border-red-600 px-4 py-1 rounded-full hover:bg-red-50 transition text-sm">
-                <i class="fas fa-trash mr-1"></i> Delete
+              <i class="fas fa-trash mr-1"></i> Delete
             </button>
           </div>
         </div>
@@ -58,16 +58,49 @@
 <!-- MODAL DE EDICIÓN -->
 <div *ngIf="mostrarModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
   <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xl">
-    <h2 class="text-xl font-semibold mb-4">Edit Property</h2>
+    <h2 class="text-xl font-semibold mb-4 text-gray-800">Edit Property</h2>
 
     <form (ngSubmit)="guardarCambios()">
       <div class="grid grid-cols-1 gap-4">
-        <input [(ngModel)]="propiedadEditando.titulo" name="titulo" placeholder="Title" class="border p-2 rounded" required>
-        <textarea [(ngModel)]="propiedadEditando.descripcion" name="descripcion" placeholder="Description" class="border p-2 rounded" required></textarea>
-        <input [(ngModel)]="propiedadEditando.direccion" name="direccion" placeholder="Address" class="border p-2 rounded" required>
-        <input [(ngModel)]="propiedadEditando.municipio" name="municipio" placeholder="Municipality" class="border p-2 rounded" required>
-        <input [(ngModel)]="propiedadEditando.capacidad" name="capacidad" type="number" placeholder="Capacity" class="border p-2 rounded" required>
-        <input [(ngModel)]="propiedadEditando.precioPorNoche" name="precioPorNoche" type="number" placeholder="Price per night" class="border p-2 rounded" required>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Title</label>
+          <input [(ngModel)]="propiedadEditando.titulo" name="titulo" class="w-full border p-2 rounded" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Description</label>
+          <textarea [(ngModel)]="propiedadEditando.descripcion" name="descripcion" rows="3" class="w-full border p-2 rounded resize-none" required></textarea>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Address</label>
+          <input [(ngModel)]="propiedadEditando.direccion" name="direccion" class="w-full border p-2 rounded" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Municipality</label>
+          <input [(ngModel)]="propiedadEditando.municipio" name="municipio" class="w-full border p-2 rounded" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Capacity</label>
+          <input [(ngModel)]="propiedadEditando.capacidad" name="capacidad" type="number" min="1" class="w-full border p-2 rounded" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Price per Night</label>
+          <input [(ngModel)]="propiedadEditando.precioPorNoche" name="precioPorNoche" type="number" min="0" class="w-full border p-2 rounded" required>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Status</label>
+          <select [(ngModel)]="propiedadEditando.estado" name="estado" class="w-full border p-2 rounded" required>
+            <option [ngValue]="'DISPONIBLE'">Available</option>
+            <option [ngValue]="'NO_DISPONIBLE'">Not Available</option>
+          </select>
+        </div>
+
       </div>
 
       <div class="mt-6 flex justify-end space-x-4">

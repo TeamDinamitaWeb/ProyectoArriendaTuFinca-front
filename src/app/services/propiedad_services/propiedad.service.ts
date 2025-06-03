@@ -44,9 +44,14 @@ export class PropiedadService {
     return this.http.post<Propiedad>(this.apiUrl, propiedad, { headers });
   }
 
-  // Actualizar propiedad
   actualizarPropiedad(id: number, propiedad: Propiedad): Observable<Propiedad> {
-    return this.http.put<Propiedad>(`${this.apiUrl}/${id}`, propiedad);
+    const token = localStorage.getItem('jwt_token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.put<Propiedad>(`${this.apiUrl}/${id}`, propiedad, { headers });
   }
 
   // Eliminar propiedad
