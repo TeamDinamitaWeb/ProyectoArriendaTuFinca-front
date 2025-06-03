@@ -13,7 +13,13 @@ export class PropiedadService {
 
   // Obtener todas las propiedades activas
   obtenerTodos(): Observable<Propiedad[]> {
-    return this.http.get<Propiedad[]>(this.apiUrl);
+    const token = localStorage.getItem('jwt_token');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<Propiedad[]>(this.apiUrl, { headers });
   }
 
   // Obtener todas las propiedades, incluso eliminadas

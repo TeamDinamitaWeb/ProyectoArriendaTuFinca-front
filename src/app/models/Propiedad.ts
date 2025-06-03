@@ -10,7 +10,7 @@ export class Propiedad {
     public capacidad: number,
     public precioPorNoche: number,
     public estado: EstadoPropiedad,
-    public usuario?: Usuario, // Mostrar info del dueño
+    public usuarioId?: number, // Mostrar info del dueño
     public status?: number,    // Solo se maneja elementos eliminados
     public id?: number
   ) {}

@@ -9,6 +9,7 @@ import { PropertiesComponent } from './components/properties/properties.componen
 import { VerUsuariosComponent } from './components/admin/ver-usuarios/ver-usuarios.component';
 import { VerPropiedadComponent } from './components/ver-propiedad/ver-propiedad.component';
 import { PublicarPropiedadComponent } from './components/publicar-propiedad/publicar-propiedad.component';
+import { MisPropiedadesComponent } from './components/mis-propiedades/mis-propiedades.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -21,6 +22,6 @@ export const routes: Routes = [
   { path: 'ver-usuarios', component: VerUsuariosComponent },
   { path: 'propiedad/:id', component: VerPropiedadComponent },
   { path: 'publicar-propiedad', component: PublicarPropiedadComponent },
+  { path: 'mis-propiedades', component: MisPropiedadesComponent},
   { path: '**', redirectTo: '' },
 ];
-

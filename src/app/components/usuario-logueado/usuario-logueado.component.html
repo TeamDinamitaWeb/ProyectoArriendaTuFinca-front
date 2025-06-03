@@ -42,7 +42,7 @@
 
           <div class="py-1">
             <a routerLink="/update-usuario"
-              class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
+              class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition no-underline">
               <i class="fas fa-user-edit w-4"></i>
               Edit Profile
             </a>
@@ -50,9 +50,16 @@
             <!-- SOLO SI ES ARRENDADOR -->
             <a *ngIf="usuarioLogueado?.tipoUsuario === 'ARRENDADOR'" 
               routerLink="/publicar-propiedad"
-              class="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition">
+              class="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition no-underline">
               <i class="fas fa-plus-circle w-4 no-underline"></i>
-              Publicar propiedad
+              Publish property
+            </a>
+
+            <a *ngIf="usuarioLogueado?.tipoUsuario === 'ARRENDADOR'" 
+              routerLink="/mis-propiedades"
+              class="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50 transition no-underline">
+              <i class="fas fa-home w-4 no-underline"></i>
+              My Properties
             </a>
 
             <button (click)="cerrarSesion()"

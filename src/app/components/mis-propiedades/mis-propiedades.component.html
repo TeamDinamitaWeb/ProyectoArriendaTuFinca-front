@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<section class="min-h-screen px-6 py-16 animated-background">
+  <div class="max-w-6xl mx-auto">
+    <!-- Botón de regreso -->
+    <button 
+      (click)="volverAlDashboard()"
+      class="flex items-center text-white hover:text-blue-300 transition mb-8"
+    >
+      <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+    </button>
+
+    <!-- Título -->
+    <h2 class="text-4xl font-bold text-center text-white mb-12" data-aos="fade-down">
+      My Published Properties
+    </h2>
+
+    <!-- Lista de propiedades -->
+    <div class="grid md:grid-cols-3 gap-10">
+      <div *ngFor="let propiedad of propiedadesFiltradas" 
+           class="bg-white rounded-xl shadow-lg overflow-hidden relative" 
+           data-aos="fade-up">
+
+        <img [src]="'assets/images/f' + ((propiedad.id ?? 0) % 3 + 1) + (((propiedad.id ?? 0) % 3 + 1) === 1 ? '.webp' : '.jpg')" 
+             alt="Property Image" 
+             class="w-full aspect-video object-cover">
+
+        <div class="p-4">
+          <h3 class="text-xl font-bold text-gray-800">{{ propiedad.titulo }}</h3>
+          <p class="text-gray-600 mt-1">{{ propiedad.descripcion }}</p>
+
+          <ul class="text-sm text-gray-700 mt-3 space-y-1">
+            <li><strong>Address:</strong> {{ propiedad.direccion }}</li>
+            <li><strong>Municipality:</strong> {{ propiedad.municipio }}</li>
+            <li><strong>Capacity:</strong> {{ propiedad.capacidad }} people</li>
+            <li><strong>Price per night:</strong> ${{ propiedad.precioPorNoche }}</li>
+            <li><strong>Status:</strong> {{ propiedad.estado }}</li>
+          </ul>
+
+          <!-- Botones de acción -->
+          <div class="flex justify-between mt-6">
+            <button (click)="editarPropiedad(propiedad.id!)"
+                    class="text-blue-600 border border-blue-600 px-4 py-1 rounded-full hover:bg-blue-50 transition text-sm">
+              <i class="fas fa-edit mr-1"></i> Edit
+            </button>
+
+            <button (click)="eliminarPropiedad(propiedad.id!)"
+                    class="text-red-600 border border-red-600 px-4 py-1 rounded-full hover:bg-red-50 transition text-sm">
+                <i class="fas fa-trash mr-1"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL DE EDICIÓN -->
+<div *ngIf="mostrarModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xl">
+    <h2 class="text-xl font-semibold mb-4">Edit Property</h2>
+
+    <form (ngSubmit)="guardarCambios()">
+      <div class="grid grid-cols-1 gap-4">
+        <input [(ngModel)]="propiedadEditando.titulo" name="titulo" placeholder="Title" class="border p-2 rounded" required>
+        <textarea [(ngModel)]="propiedadEditando.descripcion" name="descripcion" placeholder="Description" class="border p-2 rounded" required></textarea>
+        <input [(ngModel)]="propiedadEditando.direccion" name="direccion" placeholder="Address" class="border p-2 rounded" required>
+        <input [(ngModel)]="propiedadEditando.municipio" name="municipio" placeholder="Municipality" class="border p-2 rounded" required>
+        <input [(ngModel)]="propiedadEditando.capacidad" name="capacidad" type="number" placeholder="Capacity" class="border p-2 rounded" required>
+        <input [(ngModel)]="propiedadEditando.precioPorNoche" name="precioPorNoche" type="number" placeholder="Price per night" class="border p-2 rounded" required>
+      </div>
+
+      <div class="mt-6 flex justify-end space-x-4">
+        <button type="button" (click)="cerrarModal()" class="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">Cancel</button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
