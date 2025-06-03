@@ -10,6 +10,8 @@ import { VerUsuariosComponent } from './components/admin/ver-usuarios/ver-usuari
 import { VerPropiedadComponent } from './components/ver-propiedad/ver-propiedad.component';
 import { PublicarPropiedadComponent } from './components/publicar-propiedad/publicar-propiedad.component';
 import { MisPropiedadesComponent } from './components/mis-propiedades/mis-propiedades.component';
+import { MisSolicitudesArrendadorComponent } from './components/mis-solicitudes-arrendador/mis-solicitudes-arrendador.component';
+import { MisSolicitudesArrendatarioComponent } from './components/mis-solicitudes-arrendatario/mis-solicitudes-arrendatario.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -23,5 +25,7 @@ export const routes: Routes = [
   { path: 'propiedad/:id', component: VerPropiedadComponent },
   { path: 'publicar-propiedad', component: PublicarPropiedadComponent },
   { path: 'mis-propiedades', component: MisPropiedadesComponent},
+  { path: 'mis-solicitudes-arrendador', component: MisSolicitudesArrendadorComponent},
+  { path: 'mis-solicitudes-arrendatario', component: MisSolicitudesArrendatarioComponent }, // Placeholder for future implementation
   { path: '**', redirectTo: '' },
 ];

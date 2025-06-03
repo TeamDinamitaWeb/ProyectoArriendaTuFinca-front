@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papwG5f3UP1BOzuzMXd2iClxI1Ww+YJh8NLgBLKo9YFzA+xod1hdc4TKxEVnTq+BAEmDkzhVVk1mAJ9Hb+kYJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section class="max-w-7xl mx-auto px-6 py-10 relative">
+  <!-- Botón flotante para regresar -->
+  <button (click)="volverInicio()"
+            class="fixed top-6 left-6 bg-white shadow-lg border border-gray-200 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-gray-100 transition z-50">
+    <i class="fas fa-arrow-left text-gray-600"></i>
+    <span class="text-sm font-medium text-gray-700">Back</span>
+    </button>
+
+  <!-- Menú Perfil arriba a la derecha -->
+  <div class="absolute top-6 right-6 z-50">
+    <div class="relative" *ngIf="usuarioLogueado">
+      <button (click)="toggleMenuPerfil(); $event.stopPropagation()"
+              class="flex items-center gap-2 text-gray-700 hover:text-blue-600 focus:outline-none">
+        <i class="fas fa-user-circle text-2xl"></i>
+        <span class="font-medium">{{ usuarioLogueado?.nombre }}</span>
+        <i class="fas fa-chevron-down text-xs mt-1"></i>
+      </button>
+
+      <div *ngIf="mostrarMenuPerfil" (click)="$event.stopPropagation()"
+           class="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border animate__animated animate__fadeIn animate__faster">
+        <div class="px-4 py-3 text-sm text-gray-700 border-b">
+          <p class="font-semibold">{{ usuarioLogueado?.nombre }}</p>
+          <p class="text-xs text-gray-500 truncate">{{ usuarioLogueado?.correo }}</p>
+        </div>
+
+        <div class="py-1">
+          <a routerLink="/update-usuario"
+             class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition no-underline">
+            <i class="fas fa-user-edit w-4"></i> Edit Profile
+          </a>
+          <a *ngIf="usuarioLogueado?.tipoUsuario === 'ARRENDADOR'" routerLink="/publicar-propiedad"
+             class="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition no-underline">
+            <i class="fas fa-plus-circle w-4"></i> Publish Property
+          </a>
+          <a *ngIf="usuarioLogueado?.tipoUsuario === 'ARRENDADOR'" routerLink="/mis-propiedades"
+             class="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50 transition no-underline">
+            <i class="fas fa-home w-4"></i> My Properties
+          </a>
+          
+          <button (click)="cerrarSesion()"
+                  class="flex items-center gap-2 px-4 py-2 w-full text-left text-sm text-red-600 hover:bg-red-50 transition">
+            <i class="fas fa-sign-out-alt w-4"></i> Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Encabezado -->
+  <div class="text-center mb-10" data-aos="fade-down">
+    <div class="inline-flex items-center justify-center bg-blue-100 text-blue-600 w-16 h-16 rounded-full mb-3">
+      <i class="fas fa-file-alt text-2xl"></i>
+    </div>
+    <h1 class="text-3xl font-bold text-gray-800">Your Incoming Requests</h1>
+    <p class="text-gray-500 mt-2">Manage the requests made to your listed properties.</p>
+  </div>
+
+  <!-- Sin solicitudes -->
+  <div *ngIf="solicitudes.length === 0" class="text-center text-gray-500" data-aos="fade-up">
+    You haven’t received any requests yet.
+  </div>
+
+  <!-- Lista de solicitudes -->
+  <div class="grid md:grid-cols-2 gap-6">
+    <div *ngFor="let solicitud of solicitudes"
+         class="bg-white border border-gray-200 rounded-2xl shadow-md p-6 transition hover:shadow-lg"
+         data-aos="fade-up">
+
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-lg font-semibold text-gray-800">
+          {{ solicitud.nombreSolicitante }}
+        </h3>
+        <span
+          class="text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide"
+          [ngClass]="{
+            'bg-yellow-100 text-yellow-800': solicitud.estado === 'PENDIENTE',
+            'bg-green-100 text-green-800': solicitud.estado === 'APROBADA',
+            'bg-red-100 text-red-800': solicitud.estado === 'RECHAZADA',
+            'bg-blue-100 text-blue-800': solicitud.estado === 'PAGADA',
+            'bg-purple-100 text-purple-800': solicitud.estado === 'CALIFICADA',
+            'bg-gray-200 text-gray-800': solicitud.estado === 'CERRADA'
+          }">
+          {{ solicitud.estado }}
+        </span>
+      </div>
+
+      <p class="text-sm text-blue-600 font-medium mb-2">
+        {{ solicitud.nombrePropiedad }}
+      </p>
+
+      <ul class="text-sm text-gray-600 space-y-1 mb-4">
+        <li><strong>Dates:</strong> {{ solicitud.fechaInicio }} → {{ solicitud.fechaFin }}</li>
+        <li><strong>Guests:</strong> {{ solicitud.cantidadPersonas }}</li>
+      </ul>
+
+      <div class="flex justify-end gap-3">
+        <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition"
+                (click)="actualizarEstado(solicitud, 'APROBADA')"
+                [disabled]="solicitud.estado === 'APROBADA' || solicitud.estado === 'RECHAZADA'">
+          Approve
+        </button>
+        <button class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600 transition"
+                (click)="actualizarEstado(solicitud, 'RECHAZADA')"
+                [disabled]="solicitud.estado === 'RECHAZADA' || solicitud.estado === 'APROBADA'">
+          Reject
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

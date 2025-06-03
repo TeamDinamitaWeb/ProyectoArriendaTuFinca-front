@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Solicitud } from '../../models/SolicitudArriendo';
 
@@ -26,14 +26,56 @@ export class SolicitudService {
     return this.http.get<Solicitud>(`${this.apiUrl}/${id}`);
   }
 
+  obtenerSolicitudesPorArrendador(arrendadorId: number): Observable<Solicitud[]> {
+    const token = localStorage.getItem('jwt_token');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<Solicitud[]>(
+      `${this.apiUrl}/por-arrendador/${arrendadorId}`,
+      { headers }
+    );
+  }
+
+  obtenerSolicitudesPorArrendatario(arrendatarioId: number): Observable<Solicitud[]> {
+  const token = localStorage.getItem('jwt_token');
+
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.get<Solicitud[]>(
+    `${this.apiUrl}/por-arrendatario/${arrendatarioId}`,
+    { headers }
+  );
+}
+
   // Crear nueva solicitud
   crearSolicitud(solicitud: Solicitud): Observable<Solicitud> {
-    return this.http.post<Solicitud>(this.apiUrl, solicitud);
+    const token = localStorage.getItem('jwt_token');
+    console.log('TOKEN ENVIADO:', token); // asegúrate que no es null
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<Solicitud>(this.apiUrl, solicitud, { headers });
   }
+
 
   // Actualizar solicitud
   actualizarSolicitud(id: number, solicitud: Solicitud): Observable<Solicitud> {
-    return this.http.put<Solicitud>(`${this.apiUrl}/${id}`, solicitud);
+    const token = localStorage.getItem('jwt_token');
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      });
+    return this.http.put<Solicitud>(`${this.apiUrl}/${id}`, solicitud, { headers });
   }
 
   // Eliminar solicitud

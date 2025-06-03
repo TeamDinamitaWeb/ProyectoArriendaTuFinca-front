@@ -2,8 +2,8 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-<!-- NAVBAR -->
-<section class="bg-white z-20 sticky top-0 shadow-sm" data-aos="fade-up">
+<!-- NAVIGATION BAR -->
+<section class="bg-white z-20 sticky top-0" data-aos="fade-down">
   <header class="relative z-10 flex items-center justify-between px-8 py-6 animate__animated animate__fadeInDown">
     <div class="flex items-center space-x-3">
       <img src="assets/images/Logo.png" alt="Logo" class="w-10 h-10 object-contain -mt-1" />
@@ -11,64 +11,72 @@
     </div>
 
     <nav class="flex space-x-6 text-black font-medium">
-      <a routerLink="/usuario-logueado"
-         class="no-underline relative pb-1 border-b-2 border-transparent hover:border-blue-500 transition">
-        Home
-      </a>
-      <a routerLink="/properties"
-         class="no-underline relative pb-1 border-b-2 border-blue-500 text-blue-500">
-        Properties
-      </a>
-      <a href="#"
-         class="no-underline relative pb-1 border-b-2 border-transparent hover:border-blue-500 transition">
-        Contact
-      </a>
+      <a routerLink="/usuario-logueado" class="no-underline hover:text-blue-500">Home</a>
+      <a routerLink="/properties" class="no-underline border-b-2 border-blue-500 text-blue-400 pb-1">Properties</a>
+      <a href="#" class="no-underline relative pb-1 border-b-2 border-transparent hover:border-blue-500 transition">Contact</a>
     </nav>
 
+    <!-- PERFIL MENU -->
     <div class="flex space-x-4">
-      <div class="relative" *ngIf="usuarioLogueado">
-        <button (click)="toggleMenuPerfil()" class="flex items-center space-x-2 text-black cursor-pointer focus:outline-none">
-          <i class="fa fa-user-circle fa-lg text-black"></i>
-          <span>{{ usuarioLogueado.nombre }}</span>
+      <div class="relative z-50" *ngIf="usuarioLogueado">
+        <button (click)="toggleMenuPerfil(); $event.stopPropagation()" class="flex items-center gap-2 text-black hover:text-blue-500 focus:outline-none">
+          <i class="fas fa-user-circle text-2xl"></i>
+          <span class="font-medium">{{ usuarioLogueado?.nombre }}</span>
+          <i class="fas fa-chevron-down text-xs"></i>
         </button>
 
-        <div *ngIf="mostrarMenuPerfil"
-             class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl origin-top-right animate__animated animate__slideInDown animate__faster">
+        <div *ngIf="mostrarMenuPerfil" (click)="$event.stopPropagation()"
+             class="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border z-50 animate__animated animate__fadeIn animate__faster">
+          <div class="px-4 py-3 text-sm text-gray-700 border-b">
+            <p class="font-semibold">{{ usuarioLogueado?.nombre }}</p>
+            <p class="text-xs text-gray-500 truncate">{{ usuarioLogueado?.correo }}</p>
+          </div>
+
           <div class="py-1">
-            <a routerLink="/update-usuario" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Edit Profile</a>
-            <a routerLink="/usuario-logueado" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
-            <a (click)="cerrarSesion()" class="block px-4 py-2 text-red-600 hover:bg-gray-100">Logout</a>
+            <a routerLink="/update-usuario" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition no-underline">
+              <i class="fas fa-user-edit w-4"></i> Edit Profile
+            </a>
+            <a *ngIf="usuarioLogueado?.tipoUsuario === 'ARRENDADOR'" routerLink="/publicar-propiedad"
+              class="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition no-underline">
+              <i class="fas fa-plus-circle w-4"></i> Publish property
+            </a>
+            <a *ngIf="usuarioLogueado?.tipoUsuario === 'ARRENDADOR'" routerLink="/mis-propiedades"
+              class="flex items-center gap-2 px-4 py-2 text-sm text-indigo-600 hover:bg-indigo-50 transition no-underline">
+              <i class="fas fa-home w-4"></i> My Properties
+            </a>
+            <a *ngIf="usuarioLogueado?.tipoUsuario === 'ARRENDADOR'" routerLink="/mis-solicitudes-arrendador"
+              class="flex items-center gap-2 px-4 py-2 text-sm text-amber-600 hover:bg-amber-50 transition no-underline">
+              <i class="fas fa-file-alt w-4"></i> View Requests
+            </a>
+            <button (click)="cerrarSesion()" class="flex items-center gap-2 px-4 py-2 w-full text-left text-sm text-red-600 hover:bg-red-50 transition">
+              <i class="fas fa-sign-out-alt w-4"></i> Logout
+            </button>
           </div>
         </div>
       </div>
 
       <ng-container *ngIf="!usuarioLogueado">
-        <button routerLink="/login" class="border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white transition">
-          Sign In
-        </button>
-        <button routerLink="/create-account" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
-          Sign Up
-        </button>
+        <button routerLink="/login" class="border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-500 hover:text-white transition">Sign In</button>
+        <button routerLink="/create-account" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Sign Up</button>
       </ng-container>
     </div>
   </header>
 </section>
 
-<!-- LISTADO DE PROPIEDADES -->
-<!-- SECCION PRINCIPAL -->
-<section class="py-16 bg-gray-50 min-h-screen">
+<!-- LISTA DE PROPIEDADES -->
+<section class="py-16 bg-gray-100" data-aos="fade-up">
   <div class="max-w-7xl mx-auto px-4">
     <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Available Properties</h2>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-3 gap-10">
       <div *ngFor="let propiedad of propiedades" class="bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up">
-        <img [src]="'assets/images/f' + ((propiedad.id ?? 0) % 3 + 1) + (((propiedad.id ?? 0) % 3 + 1) === 1 ? '.webp' : '.jpg')"
+        <img [src]="'assets/images/f' + ((propiedad.id ?? 0) % 3 + 1) + (((propiedad.id ?? 0) % 3 + 1) === 1 ? '.webp' : '.jpg')" 
              alt="Property Image" class="w-full aspect-video object-cover">
         <div class="p-4">
           <h3 class="text-xl font-bold text-gray-800">{{ propiedad.titulo }}</h3>
-          <p class="text-gray-600 truncate">{{ propiedad.descripcion }}</p>
+          <p class="text-gray-600 mt-1 truncate">{{ propiedad.descripcion }}</p>
           <button (click)="abrirModalDetalle(propiedad)"
-                  class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                  class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm">
             View Details
           </button>
         </div>
@@ -77,25 +85,68 @@
   </div>
 </section>
 
-<!-- MODAL DETALLES -->
+<<!-- MODAL DETALLE PROPIEDAD -->
 <div *ngIf="modalDetalleVisible" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white w-full max-w-2xl p-6 rounded-xl shadow-lg relative animate__animated animate__fadeIn">
-    <button (click)="cerrarModales()" class="absolute top-4 right-4 text-gray-600 hover:text-red-500">
-      <i class="fas fa-times"></i>
-    </button>
+  <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-3xl animate__animated animate__fadeIn">
+    
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6 border-b pb-4">
+      <div class="flex items-center gap-3">
+        <i class="fas fa-home text-blue-600" style="font-size: 1.5rem; line-height: 1;"></i>
+        <span class="text-2xl font-bold text-gray-800 leading-none">Property Details</span>
+      </div>
+      <button (click)="cerrarModales()" class="text-gray-400 hover:text-red-500 text-xl">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
 
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">{{ propiedadSeleccionada?.titulo }}</h2>
+    <!-- Cuerpo con fondo gris suave -->
+    <div class="bg-gray-50 p-6 rounded-xl">
+      <div class="grid md:grid-cols-2 gap-6 text-sm text-gray-700">
 
-    <p><strong>Description:</strong> {{ propiedadSeleccionada?.descripcion }}</p>
-    <p><strong>Address:</strong> {{ propiedadSeleccionada?.direccion }}</p>
-    <p><strong>Municipality:</strong> {{ propiedadSeleccionada?.municipio }}</p>
-    <p><strong>Capacity:</strong> {{ propiedadSeleccionada?.capacidad }} people</p>
-    <p><strong>Price per Night:</strong> ${{ propiedadSeleccionada?.precioPorNoche }}</p>
-    <p><strong>Status:</strong> {{ propiedadSeleccionada?.estado }}</p>
+        <!-- Columna izquierda -->
+        <div class="flex flex-col gap-2">
+          <p class="flex items-start gap-2">
+            <i class="fas fa-tag text-gray-500 w-4 mt-1"></i>
+            <span><strong class="text-gray-800">Title:</strong> {{ propiedadSeleccionada?.titulo }}</span>
+          </p>
+          <p class="flex items-start gap-2">
+            <i class="fas fa-align-left text-gray-500 w-4 mt-1"></i>
+            <span><strong class="text-gray-800">Description:</strong> {{ propiedadSeleccionada?.descripcion }}</span>
+          </p>
+          <p class="flex items-start gap-2">
+            <i class="fas fa-map-marker-alt text-gray-500 w-4 mt-1"></i>
+            <span><strong class="text-gray-800">Address:</strong> {{ propiedadSeleccionada?.direccion }}</span>
+          </p>
+          <p class="flex items-start gap-2">
+            <i class="fas fa-city text-gray-500 w-4 mt-1"></i>
+            <span><strong class="text-gray-800">Municipality:</strong> {{ propiedadSeleccionada?.municipio }}</span>
+          </p>
+        </div>
 
+        <!-- Columna derecha -->
+        <div class="flex flex-col gap-2 md:border-l md:pl-6">
+          <p class="flex items-start gap-2">
+            <i class="fas fa-users text-gray-500 w-4 mt-1"></i>
+            <span><strong class="text-gray-800">Capacity:</strong> {{ propiedadSeleccionada?.capacidad }} people</span>
+          </p>
+          <p class="flex items-start gap-2">
+            <i class="fas fa-dollar-sign text-gray-500 w-4 mt-1"></i>
+            <span><strong class="text-gray-800">Price per night:</strong> ${{ propiedadSeleccionada?.precioPorNoche }}</span>
+          </p>
+          <p class="flex items-start gap-2">
+            <i class="fas fa-info-circle text-gray-500 w-4 mt-1"></i>
+            <span><strong class="text-gray-800">Status:</strong> {{ propiedadSeleccionada?.estado }}</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Botón final -->
     <div class="mt-6 text-right">
       <button (click)="abrirModalSolicitud()"
-              class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">
+              class="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-2 rounded-full shadow-md hover:from-green-600 hover:to-green-700 transition">
         Request Lease
       </button>
     </div>
@@ -104,39 +155,61 @@
 
 <!-- MODAL SOLICITUD -->
 <div *ngIf="modalSolicitudVisible" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white w-full max-w-xl p-6 rounded-xl shadow-lg relative animate__animated animate__fadeIn">
-    <button (click)="cerrarModales()" class="absolute top-4 right-4 text-gray-600 hover:text-red-500">
-      <i class="fas fa-times"></i>
-    </button>
+  <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-lg animate__animated animate__fadeIn">
+    
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6 border-b pb-4">
+      <div class="flex items-center gap-3">
+        <i class="fas fa-file-signature text-green-600" style="font-size: 1.25rem; line-height: 1;"></i>
+        <h2 class="text-xl font-bold text-gray-800 leading-none">Lease Request</h2>
+      </div>
+      <button (click)="cerrarModales()" class="text-gray-400 hover:text-red-500 text-xl">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
 
-    <h2 class="text-xl font-bold mb-4 text-gray-800">Request Lease</h2>
+    <!-- Formulario -->
+    <form (ngSubmit)="enviarSolicitud()" class="grid gap-4 bg-gray-50 p-6 rounded-xl text-sm text-gray-700">
 
-    <form (ngSubmit)="enviarSolicitud()" class="space-y-4">
-      <div>
-        <label class="block font-semibold mb-1">Start Date</label>
-        <input type="date" [(ngModel)]="nuevaSolicitud.fechaInicio" name="fechaInicio"
-               class="w-full border p-2 rounded" required>
+      <!-- Fecha inicio -->
+      <div class="flex flex-col gap-1">
+        <label class="flex items-center gap-2 font-medium text-gray-800">
+          <i class="fas fa-calendar-alt text-gray-500"></i> Start Date
+        </label>
+        <input type="date" [(ngModel)]="nuevaSolicitud.fechaInicio" name="fechaInicio" class="w-full border border-gray-300 p-2 rounded" required>
       </div>
-      <div>
-        <label class="block font-semibold mb-1">End Date</label>
-        <input type="date" [(ngModel)]="nuevaSolicitud.fechaFin" name="fechaFin"
-               class="w-full border p-2 rounded" required>
+
+      <!-- Fecha fin -->
+      <div class="flex flex-col gap-1">
+        <label class="flex items-center gap-2 font-medium text-gray-800">
+          <i class="fas fa-calendar-day text-gray-500"></i> End Date
+        </label>
+        <input type="date" [(ngModel)]="nuevaSolicitud.fechaFin" name="fechaFin" class="w-full border border-gray-300 p-2 rounded" required>
       </div>
-      <div>
-        <label class="block font-semibold mb-1">Number of People</label>
-        <input type="number" [(ngModel)]="nuevaSolicitud.cantidadPersonas" name="cantidadPersonas"
-               class="w-full border p-2 rounded" required min="1">
+
+      <!-- Cantidad de personas -->
+      <div class="flex flex-col gap-1">
+        <label class="flex items-center gap-2 font-medium text-gray-800">
+          <i class="fas fa-user-friends text-gray-500"></i> Number of People
+        </label>
+        <input type="number" [(ngModel)]="nuevaSolicitud.cantidadPersonas" name="cantidadPersonas" class="w-full border border-gray-300 p-2 rounded" required>
       </div>
-      <div class="flex justify-between">
-        <button type="button" (click)="volverADetalle()"
-                class="px-4 py-2 border rounded hover:bg-gray-100">Back</button>
+
+      <!-- Botones -->
+      <div class="flex justify-between mt-4">
+        <button type="button"
+                (click)="volverADetalle()"
+                class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition">
+          Back
+        </button>
         <button type="submit"
-                class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">Submit Request</button>
+                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+          Submit
+        </button>
       </div>
     </form>
   </div>
 </div>
-
 
 <!-- FOOTER -->
 <app-footer></app-footer>

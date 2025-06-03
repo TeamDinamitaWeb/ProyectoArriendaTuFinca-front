@@ -72,7 +72,8 @@ export class PropertiesComponent implements OnInit{
     this.nuevaSolicitud.nombrePropiedad = this.propiedadSeleccionada.titulo;
     this.nuevaSolicitud.arrendatarioId = this.usuarioLogueado.id;
     this.nuevaSolicitud.nombreSolicitante = `${this.usuarioLogueado.nombre} ${this.usuarioLogueado.apellido}`;
-    this.nuevaSolicitud.fechaSolicitud = new Date();
+    const now = new Date();
+    this.nuevaSolicitud.fechaSolicitud = now.toISOString().split('.')[0]; // "2025-06-10T14:30:00"
 
     this.modalDetalleVisible = false;
     this.modalSolicitudVisible = true;
@@ -89,6 +90,12 @@ export class PropertiesComponent implements OnInit{
   }
 
    enviarSolicitud() {
+
+    this.nuevaSolicitud.fechaInicio += 'T00:00:00';
+    this.nuevaSolicitud.fechaFin += 'T00:00:00';
+
+    // fechaSolicitud también debe ir en formato completo:
+    this.nuevaSolicitud.fechaSolicitud = new Date().toISOString().split('.')[0];
     this.solicitudService.crearSolicitud(this.nuevaSolicitud).subscribe({
       next: () => {
         alert('Lease request submitted successfully');

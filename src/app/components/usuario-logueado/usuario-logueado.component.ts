@@ -26,7 +26,7 @@ export class UsuarioLogueadoComponent implements OnInit{
     private eRef: ElementRef,
     @Inject(PLATFORM_ID) private platformId: Object) {}
 
-  propiedades = [
+  /*propiedades = [
     {
       titulo: 'Casa Moderna',
       descripcion: 'Diseño vanguardista con acabados de lujo.',
@@ -45,7 +45,7 @@ export class UsuarioLogueadoComponent implements OnInit{
       imagen: 'https://source.unsplash.com/featured/?cottage',
       animacion: 'fade-left'
     }
-  ];
+  ];*/
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -67,7 +67,7 @@ export class UsuarioLogueadoComponent implements OnInit{
       this.mostrarMenuPerfil = false;
     }
   }
-  
+
   cerrarSesion() {
     this.authService.logout();
     this.router.navigate(['/login']);

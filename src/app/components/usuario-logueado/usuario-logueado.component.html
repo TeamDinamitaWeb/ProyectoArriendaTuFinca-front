@@ -62,6 +62,16 @@
               My Properties
             </a>
 
+            <a *ngIf="usuarioLogueado?.tipoUsuario === 'ARRENDADOR'" routerLink="/mis-solicitudes-arrendador"
+              class="flex items-center gap-2 px-4 py-2 text-sm text-amber-600 hover:bg-amber-50 transition no-underline">
+              <i class="fas fa-file-alt w-4"></i> View Requests
+            </a>
+
+            <a *ngIf="usuarioLogueado?.tipoUsuario === 'ARRENDATARIO'" routerLink="/mis-solicitudes-arrendatario"
+              class="flex items-center gap-2 px-4 py-2 text-sm text-amber-600 hover:bg-amber-50 transition no-underline">
+              <i class="fas fa-file-alt w-4"></i> View Requests
+            </a>
+
             <button (click)="cerrarSesion()"
                     class="flex items-center gap-2 px-4 py-2 w-full text-left text-sm text-red-600 hover:bg-red-50 transition">
               <i class="fas fa-sign-out-alt w-4"></i>

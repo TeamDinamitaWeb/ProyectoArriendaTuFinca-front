@@ -28,7 +28,12 @@ export class PagoService {
 
   // Crear nuevo pago
   crearPago(pago: Pago): Observable<Pago> {
-    return this.http.post<Pago>(this.apiUrl, pago);
+    const token = localStorage.getItem('jwt_token');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+    return this.http.post<Pago>(this.apiUrl, pago, { headers });
   }
 
   // Actualizar pago existente
