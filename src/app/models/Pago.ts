@@ -2,7 +2,7 @@ import { EstadoPago } from "../enums/EstadoPago";
 
 export class Pago {
   constructor(
-    public id: number,
+    public id: number | null,
     public solicitudId: number,
     public valor: number,
     public banco: string,

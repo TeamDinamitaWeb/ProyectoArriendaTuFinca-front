@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Rating } from '../../models/Rating';
 
@@ -13,31 +13,49 @@ export class RatingService {
 
   // Obtener todas las calificaciones activas
   obtenerTodos(): Observable<Rating[]> {
-    return this.http.get<Rating[]>(this.apiUrl);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+    });
+    return this.http.get<Rating[]>(this.apiUrl, { headers });
   }
 
   // Obtener todas las calificaciones, incluyendo eliminadas
   obtenerTodosInclusoEliminados(): Observable<Rating[]> {
-    return this.http.get<Rating[]>(`${this.apiUrl}/all-including-deleted`);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+    });
+    return this.http.get<Rating[]>(`${this.apiUrl}/all-including-deleted`, { headers });
   }
 
   // Obtener calificación por ID
   obtenerPorId(id: number): Observable<Rating> {
-    return this.http.get<Rating>(`${this.apiUrl}/${id}`);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+    });
+    return this.http.get<Rating>(`${this.apiUrl}/${id}`, { headers });
   }
 
   // Crear nueva calificación
   crearRating(rating: Rating): Observable<Rating> {
-    return this.http.post<Rating>(this.apiUrl, rating);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+    });
+    return this.http.post<Rating>(this.apiUrl, rating, { headers });
   }
 
   // Actualizar calificación
   actualizarRating(id: number, rating: Rating): Observable<Rating> {
-    return this.http.put<Rating>(`${this.apiUrl}/${id}`, rating);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+    });
+    return this.http.put<Rating>(`${this.apiUrl}/${id}`, rating, { headers });
   }
 
   // Eliminar calificación
   eliminarRating(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+    });
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
   }
 }

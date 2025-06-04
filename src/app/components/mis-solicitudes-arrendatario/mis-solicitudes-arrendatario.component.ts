@@ -11,6 +11,8 @@ import { Pago } from '../../models/Pago';
 import { EstadoPago } from '../../enums/EstadoPago';
 import { FormsModule, NgModel } from '@angular/forms';
 import { PagoService } from '../../services/pago_services/pago.service';
+import { Rating } from '../../models/Rating';
+import { RatingService } from '../../services/rating_services/rating.service';
 
 @Component({
   selector: 'app-mis-solicitudes-arrendatario',
@@ -28,6 +30,8 @@ export class MisSolicitudesArrendatarioComponent implements OnInit {
   modalPagoVisible = false;
   solicitudSeleccionada: Solicitud | null = null;
   nuevoPago: Pago = new Pago(0, 0, 0, '', '', new Date(), EstadoPago.PENDIENTE);
+  modalCalificacionVisible = false;
+  nuevaCalificacion: Rating = new Rating();
 
   constructor(
     private solicitudService: SolicitudService,
@@ -35,6 +39,7 @@ export class MisSolicitudesArrendatarioComponent implements OnInit {
     private router: Router,
     private usuarioService: UsuarioService,
     private pagoService: PagoService,
+    private ratingService: RatingService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
@@ -51,6 +56,7 @@ export class MisSolicitudesArrendatarioComponent implements OnInit {
     }
   }
 
+  
   toggleMenuPerfil() {
     this.mostrarMenuPerfil = !this.mostrarMenuPerfil;
   }
@@ -65,16 +71,17 @@ export class MisSolicitudesArrendatarioComponent implements OnInit {
   }
 
   abrirModalPago(solicitud: Solicitud) {
+    console.log('Solicitud recibida:', solicitud);
     this.solicitudSeleccionada = solicitud;
     this.modalPagoVisible = true;
     this.nuevoPago = new Pago(
-      0,
+      null,
       solicitud.id!,
       solicitud.valor ?? 0, // Ajusta si el valor viene desde solicitud
       '',
       '',
       new Date(),
-      EstadoPago.PENDIENTE
+      EstadoPago.COMPLETADO
     );
   }
 
@@ -86,6 +93,17 @@ export class MisSolicitudesArrendatarioComponent implements OnInit {
   enviarPago(): void {
     if (!this.nuevoPago || !this.solicitudSeleccionada) return;
 
+    // Asegurar que la fecha de pago tenga el formato LocalDateTime (con hora)
+    if (this.nuevoPago.fechaPago) {
+      const fecha = new Date(this.nuevoPago.fechaPago);
+      this.nuevoPago.fechaPago = new Date(
+        fecha.getFullYear(),
+        fecha.getMonth(),
+        fecha.getDate(),
+        0, 0, 0
+      );
+    }
+
     this.pagoService.crearPago(this.nuevoPago).subscribe({
       next: (res) => {
         console.log('Pago registrado:', res);
@@ -95,6 +113,35 @@ export class MisSolicitudesArrendatarioComponent implements OnInit {
       error: (err) => {
         console.error('Error al enviar el pago:', err);
         alert('An error occurred while submitting the payment.');
+      }
+    });
+  }
+
+  abrirModalCalificacion(solicitud: Solicitud) {
+  this.modalCalificacionVisible = true;
+  this.nuevaCalificacion = new Rating();
+
+  this.nuevaCalificacion.solicitudId = solicitud.id!;
+  this.nuevaCalificacion.arrendadorId = solicitud.propiedadId!; // o busca el arrendador real si tienes acceso
+  this.nuevaCalificacion.arrendatarioId = this.usuarioLogueado!.id!;
+  this.nuevaCalificacion.nombreUsuario = this.usuarioLogueado!.nombre!;
+  this.nuevaCalificacion.nombrePropiedad = solicitud.nombrePropiedad!;
+  }
+
+  cerrarModalCalificacion() {
+    this.modalCalificacionVisible = false;
+  }
+
+  enviarCalificacion() {
+    this.ratingService.crearRating(this.nuevaCalificacion).subscribe({
+      next: (res) => {
+        console.log('Rating saved:', res);
+        alert('Thanks for your feedback!');
+        this.cerrarModalCalificacion();
+      },
+      error: (err) => {
+        console.error('Error sending rating:', err);
+        alert('There was an error submitting your rating.');
       }
     });
   }
