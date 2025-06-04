@@ -8,11 +8,12 @@ import { CommonModule, isPlatformBrowser, NgClass } from '@angular/common';
 import { EstadoSolicitud } from '../../enums/EstadoSolicitud';
 import { AuthService } from '../../services/JWT/auth.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-mis-solicitudes-arrendador',
   standalone: true,
-  imports: [CommonModule, NgClass],
+  imports: [CommonModule, NgClass, FormsModule],
   templateUrl: './mis-solicitudes-arrendador.component.html',
   styleUrl: './mis-solicitudes-arrendador.component.css'
 })
