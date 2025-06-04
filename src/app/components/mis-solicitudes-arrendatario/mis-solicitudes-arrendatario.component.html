@@ -1,10 +1,11 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papwG5f3UP1BOzuzMXd2iClxI1Ww+YJh8NLgBLKo9YFzA+xod1hdc4TKxEVnTq+BAEmDkzhVVk1mAJ9Hb+kYJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- HTML MEJORADO SIN FONDO DEGRADADO -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<section class="max-w-7xl mx-auto px-6 py-10 relative">
+<section class="min-h-screen bg-gray-50 px-6 py-10 relative">
 
   <!-- Botón flotante para volver -->
   <button (click)="volverInicio()"
-          class="fixed top-6 left-6 bg-white shadow-lg border border-gray-200 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-gray-100 transition z-50">
+          class="fixed top-6 left-6 bg-white shadow-md border border-gray-200 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-gray-100 transition z-50">
     <i class="fas fa-arrow-left text-gray-600"></i>
     <span class="text-sm font-medium text-gray-700">Back</span>
   </button>
@@ -48,64 +49,67 @@
     </div>
   </div>
 
-  <!-- Header -->
-  <div class="text-center mb-10">
-    <div class="inline-flex items-center justify-center bg-blue-100 text-blue-600 w-16 h-16 rounded-full mb-3">
-      <i class="fas fa-paper-plane text-2xl"></i>
+  <!-- Contenedor central -->
+  <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl p-10 border border-gray-200">
+
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center justify-center bg-blue-100 text-blue-600 w-16 h-16 rounded-full mb-3">
+        <i class="fas fa-paper-plane text-2xl"></i>
+      </div>
+      <h1 class="text-3xl font-bold text-gray-800">Your Sent Requests</h1>
+      <p class="text-gray-500 mt-2">Here are all the requests you've made to rent properties.</p>
     </div>
-    <h1 class="text-3xl font-bold text-gray-800">Your Sent Requests</h1>
-    <p class="text-gray-500 mt-2">Here are all the requests you've made to rent properties.</p>
-  </div>
 
-  <!-- Sin solicitudes -->
-  <div *ngIf="solicitudes.length === 0" class="text-center text-gray-500">
-    You haven't made any requests yet.
-  </div>
+    <!-- Sin solicitudes -->
+    <div *ngIf="solicitudes.length === 0" class="text-center text-gray-500">
+      You haven't made any requests yet.
+    </div>
 
-  <!-- Lista de solicitudes -->
-  <div class="grid md:grid-cols-2 gap-6">
-    <div *ngFor="let solicitud of solicitudes"
-         class="bg-white border border-gray-200 rounded-2xl shadow-md p-6 transition hover:shadow-lg">
+    <!-- Lista de solicitudes -->
+    <div class="grid md:grid-cols-2 gap-6">
+      <div *ngFor="let solicitud of solicitudes"
+           class="bg-white border border-gray-200 rounded-2xl shadow-md p-6 hover:shadow-lg transition">
 
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="text-lg font-semibold text-gray-800">
-          {{ solicitud.nombrePropiedad }}
-        </h3>
-        <span
-          class="text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide"
-          [ngClass]="{
-            'bg-yellow-100 text-yellow-800': solicitud.estado === 'PENDIENTE',
-            'bg-green-100 text-green-800': solicitud.estado === 'APROBADA',
-            'bg-red-100 text-red-800': solicitud.estado === 'RECHAZADA',
-            'bg-blue-100 text-blue-800': solicitud.estado === 'PAGADA',
-            'bg-purple-100 text-purple-800': solicitud.estado === 'CALIFICADA',
-            'bg-gray-200 text-gray-800': solicitud.estado === 'CERRADA'
-          }">
-          {{ solicitud.estado }}
-        </span>
-      </div>
-
-      <ul class="text-sm text-gray-600 space-y-1 mb-4">
-        <li><strong>Dates:</strong> {{ solicitud.fechaInicio }} → {{ solicitud.fechaFin }}</li>
-        <li><strong>Guests:</strong> {{ solicitud.cantidadPersonas }}</li>
-      </ul>
-
-      <p class="text-xs text-gray-500">Requested on: {{ solicitud.fechaSolicitud | date }}</p>
-
-      <!-- Botón Pay si está aprobada -->
-      <div *ngIf="solicitud.estado === 'APROBADA'" class="mt-4 text-right">
-        <button (click)="abrirModalPago(solicitud)"
-                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition text-sm">
-          Pay Now
-        </button>
-      </div>
-      <!-- Botón Rate Stay si el pago está completado -->
-        <div *ngIf="solicitud.estado === 'PAGADA'" class="mt-2 text-right">
-            <button (click)="abrirModalCalificacion(solicitud)"
-                    class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition text-sm">
-                Rate Stay
-            </button>
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-lg font-semibold text-gray-800">
+            {{ solicitud.nombrePropiedad }}
+          </h3>
+          <span
+            class="text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide"
+            [ngClass]="{
+              'bg-yellow-100 text-yellow-800': solicitud.estado === 'PENDIENTE',
+              'bg-green-100 text-green-800': solicitud.estado === 'APROBADA',
+              'bg-red-100 text-red-800': solicitud.estado === 'RECHAZADA',
+              'bg-blue-100 text-blue-800': solicitud.estado === 'PAGADA',
+              'bg-purple-100 text-purple-800': solicitud.estado === 'CALIFICADA',
+              'bg-gray-200 text-gray-800': solicitud.estado === 'CERRADA'
+            }">
+            {{ solicitud.estado }}
+          </span>
         </div>
+
+        <ul class="text-sm text-gray-600 space-y-1 mb-4">
+          <li><strong>Dates:</strong> {{ solicitud.fechaInicio }} → {{ solicitud.fechaFin }}</li>
+          <li><strong>Guests:</strong> {{ solicitud.cantidadPersonas }}</li>
+        </ul>
+
+        <p class="text-xs text-gray-500">Requested on: {{ solicitud.fechaSolicitud | date }}</p>
+
+        <!-- Botones de acción -->
+        <div class="mt-4 text-right space-x-2">
+          <button *ngIf="solicitud.estado === 'APROBADA'"
+                  (click)="abrirModalPago(solicitud)"
+                  class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition text-sm">
+            Pay Now
+          </button>
+          <button *ngIf="solicitud.estado === 'PAGADA'"
+                  (click)="abrirModalCalificacion(solicitud)"
+                  class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition text-sm">
+            Rate Stay
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

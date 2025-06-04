@@ -54,6 +54,8 @@ export class MisSolicitudesArrendatarioComponent implements OnInit {
         error: (err) => console.error('Error fetching tenant requests:', err)
       });
     }
+
+
   }
 
   
@@ -109,6 +111,12 @@ export class MisSolicitudesArrendatarioComponent implements OnInit {
         console.log('Pago registrado:', res);
         alert('Payment submitted successfully!');
         this.cerrarModalPago();
+        if (this.usuarioLogueado) {
+          this.solicitudService.obtenerSolicitudesPorArrendatario(this.usuarioLogueado.id!).subscribe({
+            next: (res) => this.solicitudes = res,
+            error: (err) => console.error('Error recargando solicitudes:', err)
+          });
+        }
       },
       error: (err) => {
         console.error('Error al enviar el pago:', err);

@@ -3,23 +3,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <!-- NAVIGATION BAR -->
-<section class="bg-white z-20 sticky top-0" data-aos="fade-down">
+<section class="bg-white z-20 sticky top-0 shadow-sm" data-aos="fade-down">
   <header class="relative z-10 flex items-center justify-between px-8 py-6 animate__animated animate__fadeInDown">
     <div class="flex items-center space-x-3">
       <img src="assets/images/Logo.png" alt="Logo" class="w-10 h-10 object-contain -mt-1" />
-      <h1 class="text-2xl font-bold text-black">Property Finder</h1>
+      <h1 class="text-2xl font-bold text-gray-900">Property Finder</h1>
     </div>
 
-    <nav class="flex space-x-6 text-black font-medium">
+    <nav class="flex space-x-6 text-gray-800 font-medium">
       <a routerLink="/usuario-logueado" class="no-underline hover:text-blue-500">Home</a>
-      <a routerLink="/properties" class="no-underline border-b-2 border-blue-500 text-blue-400 pb-1">Properties</a>
+      <a routerLink="/properties" class="no-underline border-b-2 border-blue-500 text-blue-500 pb-1">Properties</a>
       <a href="#" class="no-underline relative pb-1 border-b-2 border-transparent hover:border-blue-500 transition">Contact</a>
     </nav>
 
     <!-- PERFIL MENU -->
     <div class="flex space-x-4">
       <div class="relative z-50" *ngIf="usuarioLogueado">
-        <button (click)="toggleMenuPerfil(); $event.stopPropagation()" class="flex items-center gap-2 text-black hover:text-blue-500 focus:outline-none">
+        <button (click)="toggleMenuPerfil(); $event.stopPropagation()" class="flex items-center gap-2 text-gray-800 hover:text-blue-600 focus:outline-none">
           <i class="fas fa-user-circle text-2xl"></i>
           <span class="font-medium">{{ usuarioLogueado?.nombre }}</span>
           <i class="fas fa-chevron-down text-xs"></i>
@@ -68,19 +68,19 @@
 </section>
 
 <!-- LISTA DE PROPIEDADES -->
-<section class="py-16 bg-gray-100" data-aos="fade-up">
+<section class="py-16 bg-white" data-aos="fade-up">
   <div class="max-w-7xl mx-auto px-4">
     <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Available Properties</h2>
 
     <div class="grid md:grid-cols-3 gap-10">
-      <div *ngFor="let propiedad of propiedades" class="bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up">
+      <div *ngFor="let propiedad of propiedades" class="bg-white rounded-xl shadow-xl overflow-hidden transition-transform hover:-translate-y-1" data-aos="fade-up">
         <img [src]="'assets/images/f' + ((propiedad.id ?? 0) % 3 + 1) + (((propiedad.id ?? 0) % 3 + 1) === 1 ? '.webp' : '.jpg')" 
              alt="Property Image" class="w-full aspect-video object-cover">
-        <div class="p-4">
-          <h3 class="text-xl font-bold text-gray-800">{{ propiedad.titulo }}</h3>
-          <p class="text-gray-600 mt-1 truncate">{{ propiedad.descripcion }}</p>
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-gray-900 mb-1 truncate">{{ propiedad.titulo }}</h3>
+          <p class="text-sm text-gray-600 mb-4 truncate">{{ propiedad.descripcion }}</p>
           <button (click)="abrirModalDetalle(propiedad)"
-                  class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm">
+                  class="w-full bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition text-sm">
             View Details
           </button>
         </div>
@@ -89,7 +89,7 @@
   </div>
 </section>
 
-<<!-- MODAL DETALLE PROPIEDAD -->
+<!-- MODAL DETALLE PROPIEDAD -->
 <div *ngIf="modalDetalleVisible" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
   <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-3xl animate__animated animate__fadeIn">
     
