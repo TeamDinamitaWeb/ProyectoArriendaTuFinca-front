@@ -1,0 +1,7 @@
+{
+  "nombre": "Test",
+  "apellido": "User",
+  "correo": "testuser@example.com",
+  "contrasena": "TestPassword123!",
+  "tipoUsuario": "ARRENDADOR"
+} 

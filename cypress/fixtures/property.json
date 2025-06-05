@@ -1,0 +1,8 @@
+{
+  "titulo": "Test Property",
+  "descripcion": "A beautiful test property for E2E testing.",
+  "direccion": "123 Test Lane",
+  "municipio": "Testville",
+  "capacidad": 4,
+  "precioPorNoche": 100000
+} 
