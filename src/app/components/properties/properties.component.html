@@ -73,7 +73,7 @@
     <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Available Properties</h2>
 
     <div class="grid md:grid-cols-3 gap-10">
-      <div *ngFor="let propiedad of propiedades" class="bg-white rounded-xl shadow-xl overflow-hidden transition-transform hover:-translate-y-1" data-aos="fade-up">
+      <div *ngFor="let propiedad of propiedades" class="bg-white rounded-xl shadow-xl overflow-hidden transition-transform hover:-translate-y-1" data-aos="fade-up" data-cy="property-card">
         <img [src]="'assets/images/f' + ((propiedad.id ?? 0) % 3 + 1) + (((propiedad.id ?? 0) % 3 + 1) === 1 ? '.webp' : '.jpg')" 
              alt="Property Image" class="w-full aspect-video object-cover">
         <div class="p-5">
